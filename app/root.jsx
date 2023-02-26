@@ -1,31 +1,77 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
+import { Outlet, Meta, Links, LiveReload, Scripts } from '@remix-run/react'
 
-export const meta = () => ({
-  charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
-});
+import { StarsBackground } from '~/components/starsBackground'
+import { Header } from '~/components/header'
+
+import normalize from '~/styles/normalize.css'
+import stars from '~/styles/stars.css'
+import styles from '~/styles/index.css'
+
+export function meta() {
+  return (
+    {
+      charset: 'utf-8',
+      title: 'CosmosTools',
+      viewport: 'width=device-width,initial-scale=1',
+      description: 'CosmosTools is a collections of tools to help you manipulate images and videos'
+    }
+  )
+}
+
+export function links() {
+  return [
+    {
+      rel: 'stylesheet',
+      href: normalize
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com'
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossOrigin: 'true'
+
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap'
+    },
+    {
+      rel: 'stylesheet',
+      href: styles
+    },
+    {
+      rel: 'stylesheet',
+      href: stars
+    }
+
+  ]
+}
 
 export default function App() {
   return (
-    <html lang="en">
+    <Document>
+      <Outlet />
+    </Document>
+  )
+}
+
+function Document({ children }) {
+  return (
+    <html>
       <head>
         <Meta />
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
+        <StarsBackground />
+        <Header />
+        {children}
         <Scripts />
         <LiveReload />
       </body>
     </html>
-  );
+  )
 }
