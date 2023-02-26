@@ -43,8 +43,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: rgb(24,46,65);
-  background: radial-gradient(circle, rgba(24,46,65,1) 0%, rgba(0,0,0,1) 100%);
+  background-image: radial-gradient(circle, rgb(12 22 30) 0%, rgba(0,0,0,1) 100%);
   z-index: -1000;
 }
 .z-1,

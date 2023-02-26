@@ -76,7 +76,7 @@ img {
 
 @media (min-width: 768px) {
   .stellarObjectsList {
-    margin-top: 5rem;
+    margin-top: 8rem;
   }
 }
 
@@ -147,3 +147,33 @@ img {
     display: block;
   }
 }
+
+/* Navigation */
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to top, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
+  padding: .5rem;
+  max-width: max-content;
+  margin: 0 auto;
+  border-radius: .3rem;
+  gap: .5rem;
+}
+
+.navigationLinks {
+  padding: .2rem 3rem;
+  flex: 1;
+  color: var(--white);
+  border-radius: .3rem;
+  text-decoration: none;
+
+  transition: background-color .5s ease;
+}
+
+.navigationLinks:hover,
+.navigationLinks:focus {
+  background-color: rgb(255 255 255 / .2);
+}
+
