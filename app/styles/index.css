@@ -1,0 +1,149 @@
+:root {
+  font: 'DM Sans', sans-serif;
+
+  /* Colors */
+  --primary: #233A8D;
+  --primaryRGB: 35 58 141;
+  --secondary: #fff;
+  --black: #000;
+  --white: #fff;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 1.6rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  width: 90%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Header */
+
+.header {
+  padding: 2rem 0;
+}
+
+.logo {
+  max-width: 15rem;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    margin: unset;
+  }
+}
+
+/* Main */
+
+.main {
+}
+
+@media (min-width: 768px) {
+  .main {
+    display: grid;
+    gap: 5rem;
+    grid-template-columns: 1fr 3.5fr;
+  }
+}
+
+.stellarObjectsList {
+  background-image: linear-gradient(to left, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
+  padding: 1.5rem 2rem;
+  border-radius: .3rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .stellarObjectsList {
+    margin-top: 5rem;
+  }
+}
+
+.stellarObject {
+  max-height: fit-content;
+  padding: .5rem 1rem;
+  border: 1px solid #ffffff10;
+  border-radius: .5rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+
+  transition: box-shadow .5s ease, background-color .5s ease;
+}
+
+.stellarObject:hover {
+  box-shadow: 0 0 5px var(--secondary);
+  background-color: rgb(0 0 0 / .15);
+}
+
+.star {
+  margin: .2rem;
+}
+
+[data-stellarObject='sirius'] {
+  fill: #fff;
+  filter: drop-shadow(0 0 6px #fff);
+}
+
+[data-stellarObject='vycanismajoris'] {
+  fill: #9C5A1C;
+  filter: drop-shadow(0 0 6px #C50000);
+}
+
+[data-stellarObject='adhara'] {
+  fill: #8BA5E9;
+  filter: drop-shadow(0 0 6px #3A69C6);
+}
+
+.infoObject {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem
+}
+
+.nameObject {
+  line-height: 1;
+  color: var(--white);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.nameTool {
+  color: var(--white);
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: regular;
+}
+
+.constellation {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .constellation {
+    display: block;
+  }
+}
