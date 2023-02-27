@@ -59,7 +59,8 @@ img {
 @media (min-width: 768px) {
   .main {
     display: grid;
-    gap: 5rem;
+    column-gap: 5rem;
+    row-gap: 6rem;
     grid-template-columns: 1fr 3.5fr;
   }
 }
@@ -76,7 +77,6 @@ img {
 
 @media (min-width: 768px) {
   .stellarObjectsList {
-    margin-top: 8rem;
   }
 }
 
@@ -138,16 +138,6 @@ img {
   font-weight: regular;
 }
 
-.constellation {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .constellation {
-    display: block;
-  }
-}
-
 /* Navigation */
 
 .navigation {
@@ -162,18 +152,49 @@ img {
   gap: .5rem;
 }
 
-.navigationLinks {
+.navigationBtn {
   padding: .2rem 3rem;
   flex: 1;
   color: var(--white);
   border-radius: .3rem;
   text-decoration: none;
+  background-color: transparent;
+  border: unset;
+  cursor: pointer;
 
   transition: background-color .5s ease;
 }
 
-.navigationLinks:hover,
-.navigationLinks:focus {
+.navigationBtn:hover,
+.navigationBtn.active {
   background-color: rgb(255 255 255 / .2);
 }
 
+/* Constellations */
+
+.constellations {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .constellations {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.constellationsGrid {
+  max-width: 68vw;
+  display: grid;
+  grid-template-columns: repeat(3, 68vw);
+  background-color: #ffffff10;
+  height: 100%;
+  overflow: hidden;
+
+  /* To use offset on the children */
+  position: relative;
+}
+
+.constellation {
+  border: 1px red solid;
+}

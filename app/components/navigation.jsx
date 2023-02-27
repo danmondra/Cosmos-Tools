@@ -1,15 +1,38 @@
-export function Navigation() {
+export function Navigation({ constellation, setConstellation }) {
+  const handleClick = (e) => {
+    const constellationSelected = e.target.dataset.constellation
+
+    const positionConstellation = document.querySelector(`#${constellationSelected}`).offsetLeft
+    const constellationsGrid = document.querySelector('.constellationsGrid')
+
+    constellationsGrid.scrollTo({ left: positionConstellation, behavior: 'smooth' })
+
+    setConstellation(constellationSelected)
+  }
+
   return (
     <nav className='navigation'>
-      <a href='#images' className='navigationLinks'>
+      <button
+        className={`${constellation === 'images' ? 'active' : ''} navigationBtn`}
+        data-constellation='images'
+        onClick={handleClick}
+      >
         Images
-      </a>
-      <a href='#creators' className='navigationLinks'>
+      </button>
+      <button
+        className={`${constellation === 'creators' ? 'active' : ''} navigationBtn`}
+        data-constellation='creators'
+        onClick={handleClick}
+      >
         Creators
-      </a>
-      <a href='#videos' className='navigationLinks'>
+      </button>
+      <button
+        className={`${constellation === 'videos' ? 'active' : ''} navigationBtn`}
+        data-constellation='videos'
+        onClick={handleClick}
+      >
         Videos
-      </a>
+      </button>
     </nav>
   )
 }

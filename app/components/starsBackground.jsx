@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 
 export function StarsBackground () {
   useEffect(() => {
+    if (true) return
+
     const z1 = document.getElementsByClassName('z-1')[0]
     const z2 = document.getElementsByClassName('z-2')[0]
     const z3 = document.getElementsByClassName('z-3')[0]
