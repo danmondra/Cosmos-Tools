@@ -1,44 +1,60 @@
 import { useEffect, useState } from 'react'
 
-export function StarConnections() {
+export function StarConnections({ id }) {
   const [positions, setPositions] = useState([])
 
   const getPositions = () => {
-    const starBtns = document.querySelectorAll('.starBtn')
+    const starBtns = document.querySelectorAll(`#${id} .starBtn`)
 
     if (starBtns.length === 0) return
 
     const positionsCreated = []
 
-    /* Get positions of each button of the list and create object with them */
+    /* Get positions of each star of the map and create object with them */
 
-    starBtns.forEach((_, i) => {
-      if (i > 0) {
-        const previus = starBtns[i - 1]
-        const next = starBtns[i]
+    starBtns.forEach((starBtn, i) => {
+      let previus = starBtns[i - 1]
+      let next = starBtns[i]
 
-        const position = {
-          x1: previus.offsetLeft + previus.offsetWidth / 2,
-          y1: previus.offsetTop + previus.offsetHeight / 2,
-          x2: next.offsetLeft + next.offsetHeight / 2,
-          y2: next.offsetTop + next.offsetWidth / 2
-        }
-
-        positionsCreated.push(position)
+      if (i === 0) {
+        previus = starBtns[starBtns.length - 1]
+        next = starBtns[i]
       }
+
+      const position = {
+        x1: previus.offsetLeft + previus.offsetWidth / 2,
+        y1: previus.offsetTop + previus.offsetHeight / 2,
+        x2: next.offsetLeft + next.offsetHeight / 2,
+        y2: next.offsetTop + next.offsetWidth / 2,
+        id: starBtn.className
+      }
+
+      positionsCreated.push(position)
     })
 
     return positionsCreated
   }
 
+  function showPositions() {
+    const svgConnectorContainers = document.querySelectorAll('.svgConnector')
+
+    setTimeout(() => {
+      svgConnectorContainers.forEach(container => {
+        container.style.opacity = '1'
+      })
+    }, 100)
+  }
+
   useEffect(() => {
     setPositions(getPositions())
+    showPositions()
   }, [])
 
   return (
     <svg className='svgConnector'>
-      {positions?.map(({ x1, y1, x2, y2 }) => (
-        <line key={x1 + y1} x1={x1} y1={y1} x2={x2} y2={y2} stroke='gray' />
+
+      {positions?.map(({ x1, y1, x2, y2, id }) => (
+        <line key={id} x1={x1} y1={y1} x2={x2} y2={y2} stroke='gray' />
       ))}
 
     </svg>
