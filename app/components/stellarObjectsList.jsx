@@ -1,23 +1,15 @@
 import { StellarObject } from '~/components/stellarObject'
 
-export function StellarObjectsList() {
+export function StellarObjectsList({ constellation }) {
   return (
     <section className='stellarObjectsList'>
-      <StellarObject
-        id='sirius'
-        name='Sirius'
-        tool='Image Resizer'
-      />
-      <StellarObject
-        id='vycanismajoris'
-        name='VY Canis Majoris'
-        tool='Image cropper'
-      />
-      <StellarObject
-        id='adhara'
-        name='Adhara'
-        tool='Image Scaler'
-      />
+
+      {constellation.stars.map(star => (
+        <StellarObject
+          key={`listItem${star.id}`}
+          star={star}
+        />
+      ))}
     </section>
 
   )
