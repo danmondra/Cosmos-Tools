@@ -68,6 +68,12 @@ img {
     display: grid;
     column-gap: 5rem;
     row-gap: 6rem;
+    grid-template-columns: 2fr 3.5fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .main {
     grid-template-columns: 1fr 3.5fr;
   }
 }
@@ -173,8 +179,7 @@ img {
 @media (min-width: 768px) {
   .constellations {
     display: grid;
-    grid-template-columns: repeat(3, 68vw);
-    max-width: 68vw;
+    grid-template-columns: repeat(3, 100%);
     height: 100%;
     overflow: hidden;
 
@@ -226,5 +231,5 @@ img {
   left: 0;
   opacity: 0;
 
-  transition: opacity 2s ease;
+  transition: opacity 1s ease;
 }
