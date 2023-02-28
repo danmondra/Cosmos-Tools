@@ -1,13 +1,15 @@
+import { Link } from '@remix-run/react'
 import { StellarObjectCircle } from '~/components/stellarObjectCircle'
 
-export function StellarObject({ id, name, tool }) {
+export function StellarObject({ star }) {
+  const { name, description, url } = star
   return (
-    <article className='stellarObject'>
-      <StellarObjectCircle id={id} />
+    <Link to={url} className='stellarObject'>
+      <StellarObjectCircle star={star} />
       <div className='infoObject'>
         <h3 className='nameObject'>{name}</h3>
-        <p className='nameTool'>{tool}</p>
+        <p className='nameTool'>{description}</p>
       </div>
-    </article>
+    </Link>
   )
 }
