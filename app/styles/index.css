@@ -7,6 +7,13 @@
   --secondary: #fff;
   --black: #000;
   --white: #fff;
+
+  /* Stars Colors */
+
+  /* Stars Shadows */
+  --shadow-sirius: #fff;
+  --shadow-vycanismajoris: #C50000;
+  --shadow-adhara: #3A69C6;
 }
 
 html {
@@ -66,7 +73,7 @@ img {
 }
 
 .stellarObjectsList {
-  background-image: linear-gradient(to left, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
+  background-image: linear-gradient(258deg, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
   padding: 1.5rem 2rem;
   border-radius: .3rem;
   min-height: 60vh;
@@ -81,6 +88,7 @@ img {
 }
 
 .stellarObject {
+  text-decoration: none;
   max-height: fit-content;
   padding: .5rem 1rem;
   border: 1px solid #ffffff10;
@@ -101,21 +109,7 @@ img {
 
 .star {
   margin: .2rem;
-}
-
-[data-stellarObject='sirius'] {
-  fill: #fff;
-  filter: drop-shadow(0 0 6px #fff);
-}
-
-[data-stellarObject='vycanismajoris'] {
-  fill: #9C5A1C;
-  filter: drop-shadow(0 0 6px #C50000);
-}
-
-[data-stellarObject='adhara'] {
-  fill: #8BA5E9;
-  filter: drop-shadow(0 0 6px #3A69C6);
+  max-width: 100%;
 }
 
 .infoObject {
@@ -144,7 +138,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to top, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
+  background-image: linear-gradient(258deg, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
   padding: .5rem;
   max-width: max-content;
   margin: 0 auto;
@@ -166,7 +160,7 @@ img {
 }
 
 .navigationBtn:hover,
-.navigationBtn.active {
+.navigationBtnActive {
   background-color: rgb(255 255 255 / .2);
 }
 
@@ -178,23 +172,59 @@ img {
 
 @media (min-width: 768px) {
   .constellations {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 68vw);
+    max-width: 68vw;
+    height: 100%;
+    overflow: hidden;
+
+    /* To use offset on the children */
+    position: relative;
   }
 }
 
-.constellationsGrid {
-  max-width: 68vw;
-  display: grid;
-  grid-template-columns: repeat(3, 68vw);
-  background-color: #ffffff10;
-  height: 100%;
-  overflow: hidden;
+.constellation {
+  display: flex;
+  flex-direction: column;
+}
 
-  /* To use offset on the children */
+.constellationName {
+  text-align: center;
+  color: var(--white);
+  margin: 0;
+  font-size: 3.5rem;
+}
+
+.constellationInfo {
+  text-align: center;
+  color: var(--white);
+  margin: .5rem 0;
+}
+
+.constellationMap {
+  height: 100%;
   position: relative;
 }
 
-.constellation {
-  border: 1px red solid;
+.starBtn {
+  all: unset;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.svgConnector {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+
+  transition: opacity 2s ease;
 }

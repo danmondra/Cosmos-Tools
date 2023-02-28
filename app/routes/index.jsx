@@ -2,9 +2,13 @@ import { useState } from 'react'
 
 import { StellarObjectsList } from '~/components/stellarObjectsList'
 import { Navigation } from '~/components/navigation'
+import { Constellations } from '~/components/constellations'
+
+import constellations from '~/data/constellations'
 
 export default function Index() {
-  const [constellation, setConstellation] = useState('images')
+  const [constellation, setConstellation] = useState(constellations[0].id)
+
   return (
     <main className='container main'>
       <div />
@@ -12,14 +16,10 @@ export default function Index() {
         constellation={constellation}
         setConstellation={setConstellation}
       />
-      <StellarObjectsList />
-      <section className='constellations'>
-        <div className='constellationsGrid'>
-          <section className='constellation' id='images'>Images</section>
-          <section className='constellation' id='creators'>Creators</section>
-          <section className='constellation' id='videos'>Videos</section>
-        </div>
-      </section>
+      <StellarObjectsList
+        constellation={constellations.find(con => con.id === constellation)}
+      />
+      <Constellations />
     </main>
   )
 }
