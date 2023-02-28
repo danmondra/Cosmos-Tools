@@ -11,9 +11,10 @@ export function ConstellationMap({ id, stars }) {
       />
       {stars.map((star) => (
         <Link
+          key={`starMap${star.id}`}
           to={star.url}
           className='starBtn'
-          key={`starMap${star.id}`}
+          data-star={star.id}
           style={{
             top: star.position.top,
             left: star.position.left,

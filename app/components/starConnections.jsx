@@ -26,7 +26,7 @@ export function StarConnections({ id }) {
         y1: previus.offsetTop + previus.offsetHeight / 2,
         x2: next.offsetLeft + next.offsetHeight / 2,
         y2: next.offsetTop + next.offsetWidth / 2,
-        id: starBtn.className
+        id: starBtn.dataset.star
       }
 
       positionsCreated.push(position)
