@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 export function StarConnections({ id }) {
   const [positions, setPositions] = useState([])
+  const [windowSize, setWindowSize] = useState(0)
 
   const getPositions = () => {
     const starBtns = document.querySelectorAll(`#${id} .starBtn`)
@@ -35,7 +36,7 @@ export function StarConnections({ id }) {
     return positionsCreated
   }
 
-  function showPositions() {
+  function showConnectorLines() {
     const svgConnectorContainers = document.querySelectorAll('.svgConnector')
 
     setTimeout(() => {
@@ -45,9 +46,19 @@ export function StarConnections({ id }) {
     }, 100)
   }
 
+  function resizeListener() {
+    window.addEventListener('resize', (e) => {
+      setWindowSize(e.target.innerWidth)
+    })
+  }
+
   useEffect(() => {
     setPositions(getPositions())
-    showPositions()
+    showConnectorLines()
+  }, [windowSize])
+
+  useEffect(() => {
+    resizeListener()
   }, [])
 
   return (
