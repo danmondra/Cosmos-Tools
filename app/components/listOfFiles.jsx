@@ -1,17 +1,24 @@
 import { ListFile } from './listFile'
+import { BtnDownload } from './btnDownload'
 
-export function ListOfFiles({ actualFile, setActualFile, files }) {
+export function ListOfFiles({ currentFile, setCurrentFile, files }) {
   return (
-    <ul className='listOfFiles'>
-      {files.map(file => (
-        <ListFile
-          key={file.asset_id}
-          actualFile={actualFile}
-          setActualFile={setActualFile}
-          file={file}
-        />
-      ))}
-    </ul>
-
+    <div className='listOfFilesContainer'>
+      <ul className='listOfFiles'>
+        {files.map(file => (
+          <ListFile
+            key={file.asset_id}
+            currentFile={currentFile}
+            setCurrentFile={setCurrentFile}
+            file={file}
+          />
+        ))}
+      </ul>
+      {files.length > 1 &&
+        <BtnDownload
+          text='Download All'
+          files={files}
+        />}
+    </div>
   )
 }

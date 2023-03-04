@@ -318,6 +318,7 @@ img {
 
 
 .btnDownload {
+  width: 100%;
   padding: 1rem 2rem;
   background-color: var(--primary);
   color: var(--white);
@@ -326,6 +327,8 @@ img {
   border-radius: .5rem;
   border: none;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
 
   transition: background-color .3s ease;
 }
@@ -346,7 +349,7 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-size: 1.8rem;
   font-weight: bold;
   color: var(--white);
@@ -356,6 +359,7 @@ img {
 .fileInfoData {
   text-align: right;
   font-weight: normal;
+  overflow-wrap: anywhere;
 }
 
 /* Tool Container */
@@ -380,6 +384,7 @@ img {
 @media (min-width: 768px) {
   .imageUploadViewContainer {
     height: 60vh;
+    min-height: 35rem;
   }
 }
 
@@ -451,6 +456,13 @@ img {
 }
 
 /* List of Files */
+
+.listOfFilesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .listOfFiles {
   margin: 0;
   padding: 0;
@@ -458,6 +470,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  max-height: 60vh;
 }
 
 .listFile {
@@ -468,16 +481,15 @@ img {
   grid-template-columns: 1fr 3fr;
   gap: 2rem;
   cursor: pointer;
+  outline: 2px transparent solid;
 
-  transition: border-color .5s ease;
+  transition: border-color .5s ease, outline-color .5s ease;
 }
 
+.listFile:hover,
 .listFileActive {
   border-color: var(--primary);
-}
-
-.listFile:hover {
-  border-color: var(--primary);
+  outline-color: var(--primary);
 }
 
 .listFileImg {
