@@ -1,9 +1,16 @@
 import { ListFile } from './listFile'
 
-export function ListOfFiles({ list }) {
+export function ListOfFiles({ actualFile, setActualFile, files }) {
   return (
     <ul className='listOfFiles'>
-      <ListFile />
+      {files.map(file => (
+        <ListFile
+          key={file.asset_id}
+          actualFile={actualFile}
+          setActualFile={setActualFile}
+          file={file}
+        />
+      ))}
     </ul>
 
   )

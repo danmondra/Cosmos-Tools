@@ -1,6 +1,6 @@
 export async function uploadFile(file) {
-  const CLOUDINARY_API = process.env.CLOUDINARY_API
-  const CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET
+  const CLOUDINARY_API = 'https://api.cloudinary.com/v1_1/dczm31ujx/image/upload'
+  const CLOUDINARY_UPLOAD_PRESET = 'images'
 
   const formData = new FormData()
   formData.append('file', file)
