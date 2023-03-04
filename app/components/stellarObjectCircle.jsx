@@ -8,7 +8,8 @@ export function StellarObjectCircle({ star }) {
       className='star'
       style={{
         fill: color,
-        filter: `drop-shadow(0 0 6px ${shadow})`
+        filter: `drop-shadow(0 0 6px ${shadow})`,
+        maxHeight: '15rem'
       }}
     >
       <circle cx='50' cy='50' r='50' />

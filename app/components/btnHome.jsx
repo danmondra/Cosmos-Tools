@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react'
 
-export function HomeBtn() {
+export function BtnHome() {
   return (
     <div>
       <Link to='/' className='homeIcon'>
