@@ -25,6 +25,7 @@ export default function useUploadFiles() {
     const formatedResponse = {
       asset_id: file.asset_id,
       bytes: file.bytes,
+      bytesOG: file.bytes,
       format: file.format,
       height: file.height,
       heightOG: file.height,
