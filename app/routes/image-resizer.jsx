@@ -6,9 +6,6 @@ import useAspectRatio from '~/hooks/useAspectRatio'
 
 // Data
 import constellations from '~/data/constellations'
-import { Cloudinary } from '@cloudinary/url-gen'
-
-import { scale } from '@cloudinary/url-gen/actions/resize'
 
 // Components
 import { BtnHome } from '~/components/btnHome'
@@ -17,6 +14,12 @@ import { BtnDownload } from '../components/btnDownload'
 import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageViewer } from '../components/imageViewer'
 import { FileInfo } from '../components/fileInfo'
+
+// Utils
+import { formatBytes } from '~/utils/formatBytes'
+
+import { Cloudinary } from '@cloudinary/url-gen'
+import { scale } from '@cloudinary/url-gen/actions/resize'
 
 export function meta() {
   return (
@@ -31,8 +34,8 @@ function ImageResizer() {
 
   const [actualFile, setActualFile] = useState(files.length > 0 ? files[0] : {})
 
-  const [InputRangeWidth, width] = useInputRange()
-  const [InputRangeHeight, height] = useInputRange()
+  const [InputRangeWidth, width] = useInputRange({ valueToModify: 'width', actualFile })
+  const [InputRangeHeight, height] = useInputRange({ valueToModify: 'height', actualFile })
   const [BtnAspectRatio, aspectRatio] = useAspectRatio()
 
   const { name, description } = constellations[0].stars[0]
@@ -87,12 +90,10 @@ function ImageResizer() {
           <>
             <form className='formOptionsImage'>
               <InputRangeWidth
-                valueToModify='Width'
                 group='resize'
                 defaultValue={actualFile.widthOG}
               />
               <InputRangeHeight
-                valueToModify='Height'
                 group='resize'
                 defaultValue={actualFile.heightOG}
               />
@@ -105,7 +106,7 @@ function ImageResizer() {
             </form>
             <FileInfo
               name={actualFile.original_filename}
-              size={`${Math.round(actualFile.bytes / 1024)}kB`}
+              size={formatBytes(actualFile.bytes, 2)}
               dimentions={`${actualFile.width} x ${actualFile.height}px`}
             />
           </>}

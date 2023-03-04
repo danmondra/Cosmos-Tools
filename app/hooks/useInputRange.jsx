@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function useInputRange() {
+export default function useInputRange({ valueToModify, actualFile }) {
   const [value, setValue] = useState(undefined)
 
   function handleMouseUp(e) {
     setValue(+e.target.value)
   }
 
-  function InputRange({ valueToModify, group, defaultValue }) {
+  useEffect(() => {
+    if (!actualFile?.original_filename) return
+
+    const valueActual = actualFile[valueToModify]
+    setValue(valueActual)
+  }, [actualFile])
+
+  function InputRange({ group, defaultValue }) {
     function handleChange(e) {
       // Put value in HTML
       const rangeSize = document.querySelector(`#${valueToModify} + .rangeSize`)
