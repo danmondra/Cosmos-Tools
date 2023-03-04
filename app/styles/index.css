@@ -135,7 +135,7 @@ img {
   color: var(--white);
   font-size: 1.3rem;
   margin: 0;
-  font-weight: regular;
+  font-weight: normal;
 }
 
 /* Navigation */
@@ -232,4 +232,286 @@ img {
   opacity: 0;
 
   transition: opacity 1s ease;
+}
+
+
+/* Image Tools */
+/* Form Images */
+
+.fileOptionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.formOptionsImage {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.rangeSize {
+  text-align: right;
+  margin: 0;
+  color: var(--white);
+}
+
+.aspectRatio {
+  align-self: flex-end;
+  display: flex;
+  cursor: pointer;
+  width: fit-content;
+  position: relative;
+}
+
+.checkBoxIcon {
+  border-radius: .5rem;
+  transition: background-color .2s ease;
+}
+
+.aspectRatio::before {
+  content: 'Keep aspect ratio';
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 120%;
+  background-color: #00000080;
+  padding: .5rem;
+  border-radius: .5rem;
+  color: var(--white);
+  white-space: nowrap;
+
+  transition: opacity .5s ease;
+}
+
+.aspectRatio:hover::before{
+  opacity: 1;
+}
+
+.checkBoxAspectRatio {
+  display: none;
+}
+.checkBoxAspectRatio:checked + .checkBoxIcon {
+  background-color: rgb( 255 255 255 / .3 );
+}
+
+
+/* Button Download */
+
+
+.btnDownload {
+  padding: 1rem 2rem;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-radius: .5rem;
+  border: none;
+  cursor: pointer;
+
+  transition: background-color .3s ease;
+}
+
+.btnDownload:hover {
+  background-color: rgb(var(--primaryRGB) / .5);
+}
+
+/* File Information */
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.fileInfoName {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--white);
+  gap: 1rem;
+}
+
+.fileInfoData {
+  text-align: right;
+  font-weight: normal;
+}
+
+/* Tool Container */
+
+.toolContainer {
+}
+
+@media (min-width: 768px) {
+  .toolContainer {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.imageUploadViewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .imageUploadViewContainer {
+    height: 60vh;
+  }
+}
+
+/* DragNDrop */
+.dragndrop {
+  padding: 1rem;
+  background-color: rgb( 255 255 255 / .1 );
+  min-height: min-content;
+  height: 35%;
+  border: 3px var(--primary) dashed;
+  border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color .5s ease, transform .5s ease;
+}
+
+.dragndropActive {
+  background-color: rgb( var(--primaryRGB) / .4 );
+  transform: scale(1.03);
+}
+
+.cloudIcon {
+  fill: #ffffff60;
+  max-width: 2rem;
+}
+
+.dragndropText {
+  text-align: center;
+  font-size: 2.5rem;
+  color: rgb(255 255 255 / .6);
+  margin: 0;
+}
+
+.dragndropOr {
+  text-align: center;
+  font-size: 1.8rem;
+  color: rgb(255 255 255 / .6);
+  margin: 0;
+}
+
+.browseFiles {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.inputFile {
+  display: none;
+}
+
+.imageViewContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(65% - 2rem);
+}
+
+.imageView {
+  object-fit: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/* List of Files */
+.listOfFiles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.listFile {
+  border: 2px solid var(--white);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+  cursor: pointer;
+
+  transition: border-color .5s ease;
+}
+
+.listFileActive {
+  border-color: var(--primary);
+}
+
+.listFile:hover {
+  border-color: var(--primary);
+}
+
+.listFileImg {
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  height: 6rem;
+}
+
+.listFileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.listFileName {
+  margin: 0;
+  color: var(--white);
+  font-weight: bold;
+
+  /* Only one line and text overflow with elypsis */
+  max-width: 98%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.listFileSizes {
+  margin: 0;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.homeIcon {
+  display: block;
+  height: 32.4px;
 }
