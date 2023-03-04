@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function useInputRange({ valueToModify, actualFile }) {
+export default function useInputRange({ valueToModify, currentFile }) {
   const [value, setValue] = useState(undefined)
 
   function handleMouseUp(e) {
@@ -8,11 +8,11 @@ export default function useInputRange({ valueToModify, actualFile }) {
   }
 
   useEffect(() => {
-    if (!actualFile?.original_filename) return
+    if (!currentFile?.original_filename) return
 
-    const currentValue = actualFile[valueToModify]
+    const currentValue = currentFile[valueToModify]
     setValue(currentValue)
-  }, [actualFile])
+  }, [currentFile])
 
   function InputRange({ group, defaultValue }) {
     function handleChange(e) {

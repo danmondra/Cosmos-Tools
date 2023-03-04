@@ -7,6 +7,9 @@ import useAspectRatio from '~/hooks/useAspectRatio'
 // Data
 import constellations from '~/data/constellations'
 
+// Services
+import { getFileInfo } from '~/services/getFileInfo'
+
 // Components
 import { BtnHome } from '~/components/btnHome'
 import { ToolInfo } from '~/components/toolInfo'
@@ -30,40 +33,42 @@ export function meta() {
 }
 
 function ImageResizer() {
-  const [DragAndDrop, files, setResponses] = useUploadFiles()
+  const [DragAndDrop, images, setResponses] = useUploadFiles()
 
-  const [actualFile, setActualFile] = useState(files.length > 0 ? files[0] : {})
+  const [currentImage, setCurrentImage] = useState(images.length > 0 ? images[0] : {})
 
-  const [InputRangeWidth, width] = useInputRange({ valueToModify: 'width', actualFile })
-  const [InputRangeHeight, height] = useInputRange({ valueToModify: 'height', actualFile })
+  const [InputRangeWidth, width] = useInputRange({ valueToModify: 'width', currentFile: currentImage })
+  const [InputRangeHeight, height] = useInputRange({ valueToModify: 'height', currentFile: currentImage })
   const [BtnAspectRatio, aspectRatio] = useAspectRatio()
 
   const { name, description } = constellations[0].stars[0]
 
   useEffect(() => {
-    if (files.length === 0) return
-    if (actualFile?.original_filename) return
+    if (images.length === 0) return
+    if (currentImage?.original_filename) return
 
-    setActualFile(files[0])
-  }, [files])
+    setCurrentImage(images[0])
+  }, [images])
 
   useEffect(() => {
-    if (!actualFile?.original_filename) return
+    if (!currentImage?.original_filename) return
 
     resizeImage()
   }, [width, height, aspectRatio])
 
-  function updateImage(img) {
-    const newImage = { ...actualFile }
+  async function updateImage(img) {
+    const newImage = { ...currentImage }
+
     newImage.width = width || newImage.widthOG
     newImage.height = height || newImage.heightOG
     newImage.secure_url = img.toURL()
 
-    // Fetch a getinfo
+    const imageInfo = await getFileInfo(img.addFlag('getinfo').toURL())
+    newImage.bytes = imageInfo.output.bytes
 
-    setActualFile(newImage)
+    setCurrentImage(newImage)
 
-    const newFiles = files.map(file => file.public_id === newImage.public_id ? newImage : file)
+    const newFiles = images.map(file => file.public_id === newImage.public_id ? newImage : file)
     setResponses(newFiles)
   }
 
@@ -78,8 +83,8 @@ function ImageResizer() {
       }
     })
 
-    const img = cloudinary.image(actualFile.public_id)
-      .resize(scale().width(width || actualFile.widthOG).height(height || actualFile.heightOG))
+    const img = cloudinary.image(currentImage.public_id)
+      .resize(scale().width(width).height(height))
 
     updateImage(img)
   }
@@ -92,46 +97,47 @@ function ImageResizer() {
         description={description}
       />
       <section className='stellarObjectsList fileOptionsContainer'>
-        {actualFile?.original_filename &&
+        {currentImage?.original_filename &&
           <>
             <form className='formOptionsImage'>
               <InputRangeWidth
                 group='resize'
-                defaultValue={actualFile.widthOG}
+                defaultValue={currentImage.widthOG}
               />
               <InputRangeHeight
                 group='resize'
-                defaultValue={actualFile.heightOG}
+                defaultValue={currentImage.heightOG}
               />
 
               <BtnAspectRatio />
 
               <BtnDownload
                 text='Download'
+                files={currentImage}
               />
             </form>
             <FileInfo
-              name={actualFile.original_filename}
-              size={formatBytes(actualFile.bytes, 2)}
-              dimentions={`${actualFile.width} x ${actualFile.height}px`}
+              name={currentImage.original_filename}
+              size={formatBytes(currentImage.bytes, 2)}
+              dimentions={`${currentImage.width} x ${currentImage.height}px`}
             />
           </>}
       </section>
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>
           <DragAndDrop />
-          {actualFile?.original_filename &&
+          {currentImage?.original_filename &&
             <ImageViewer
-              src={actualFile.secure_url}
-              alt={actualFile.original_filename}
+              src={currentImage.secure_url}
+              alt={currentImage.original_filename}
             />}
         </div>
 
-        {actualFile?.original_filename
+        {currentImage?.original_filename
           ? <ListOfFiles
-              actualFile={actualFile}
-              setActualFile={setActualFile}
-              files={files}
+              currentFile={currentImage}
+              setCurrentFile={setCurrentImage}
+              files={images}
             />
           : <></>}
       </section>

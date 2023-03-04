@@ -32,7 +32,8 @@
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json",
     "rules": {
-      "space-before-function-paren": "off"
+      "space-before-function-paren": "off",
+      "camelcase": "off"
     }
   }
 }
