@@ -1,3 +1,5 @@
+import { formatBytes } from '~/utils/formatBytes'
+
 export function ListFile({ actualFile, setActualFile, file }) {
   const { secure_url, original_filename, width, height, bytes, asset_id } = file
 
@@ -15,7 +17,7 @@ export function ListFile({ actualFile, setActualFile, file }) {
         <p className='listFileName'>{original_filename}</p>
         <p className='listFileSizes'>
           <span>{`${width} x ${height}px`}</span>
-          <span>{`${Math.round(bytes / 1024)}kB`}</span>
+          <span>{formatBytes(bytes, 2)}</span>
         </p>
       </div>
     </li>

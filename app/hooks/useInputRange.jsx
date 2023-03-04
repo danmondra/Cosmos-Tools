@@ -10,8 +10,8 @@ export default function useInputRange({ valueToModify, actualFile }) {
   useEffect(() => {
     if (!actualFile?.original_filename) return
 
-    const valueActual = actualFile[valueToModify]
-    setValue(valueActual)
+    const currentValue = actualFile[valueToModify]
+    setValue(currentValue)
   }, [actualFile])
 
   function InputRange({ group, defaultValue }) {
@@ -25,11 +25,13 @@ export default function useInputRange({ valueToModify, actualFile }) {
       scaleNumber.textContent = `x${(e.target.value / defaultValue).toFixed(2)}`
     }
 
+    const calculateScale = (value, decimals) => `x${(value / defaultValue).toFixed(decimals)}`
+
     return (
       <div className={`inputContainer ${valueToModify}`}>
         <label htmlFor={valueToModify} className='inputName'>
           {valueToModify}:
-          <span className='scaleNumber'>x{value ? (value / defaultValue).toFixed(2) : 1}</span>
+          <span className='scaleNumber'>{calculateScale(value, 2)}</span>
         </label>
         <input
           id={valueToModify}
@@ -37,11 +39,11 @@ export default function useInputRange({ valueToModify, actualFile }) {
           name={group}
           max={defaultValue * 3}
           min='1'
-          defaultValue={value || defaultValue}
+          defaultValue={value}
           onMouseUp={handleMouseUp}
           onChange={handleChange}
         />
-        <p className='rangeSize'>{value || defaultValue}px</p>
+        <p className='rangeSize'>{value}px</p>
       </div>
     )
   }

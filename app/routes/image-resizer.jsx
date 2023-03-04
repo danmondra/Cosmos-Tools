@@ -40,6 +40,33 @@ function ImageResizer() {
 
   const { name, description } = constellations[0].stars[0]
 
+  useEffect(() => {
+    if (files.length === 0) return
+    if (actualFile?.original_filename) return
+
+    setActualFile(files[0])
+  }, [files])
+
+  useEffect(() => {
+    if (!actualFile?.original_filename) return
+
+    resizeImage()
+  }, [width, height, aspectRatio])
+
+  function updateImage(img) {
+    const newImage = { ...actualFile }
+    newImage.width = width || newImage.widthOG
+    newImage.height = height || newImage.heightOG
+    newImage.secure_url = img.toURL()
+
+    // Fetch a getinfo
+
+    setActualFile(newImage)
+
+    const newFiles = files.map(file => file.public_id === newImage.public_id ? newImage : file)
+    setResponses(newFiles)
+  }
+
   function resizeImage() {
     if (aspectRatio) {
       // TODO -- Aspect ratio
@@ -54,29 +81,8 @@ function ImageResizer() {
     const img = cloudinary.image(actualFile.public_id)
       .resize(scale().width(width || actualFile.widthOG).height(height || actualFile.heightOG))
 
-    const newImage = actualFile
-    newImage.secure_url = img.toURL()
-    newImage.width = width || newImage.widthOG
-    newImage.height = height || newImage.heightOG
-
-    setActualFile({ ...newImage })
-
-    const newFiles = files.map(file => file.public_id === newImage.public_id ? newImage : file)
-    setResponses(newFiles)
+    updateImage(img)
   }
-
-  useEffect(() => {
-    if (files.length === 0) return
-    if (actualFile?.original_filename) return
-
-    setActualFile(files[0])
-  }, [files])
-
-  useEffect(() => {
-    if (!actualFile?.original_filename) return
-
-    resizeImage()
-  }, [width, height, aspectRatio])
 
   return (
     <main className='container main'>
