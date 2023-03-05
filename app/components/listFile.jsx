@@ -1,7 +1,6 @@
-import { formatBytes } from '~/utils/formatBytes'
+import { formatBytes, formatDimentions } from '~/utils/formatData'
 
 export function ListFile({ currentFile, setCurrentFile, file }) {
-  console.log(currentFile)
   const { secure_url, original_filename, width, height, bytes, asset_id } = file
 
   function handleClick() {
@@ -17,7 +16,7 @@ export function ListFile({ currentFile, setCurrentFile, file }) {
       <div className='listFileInfo'>
         <p className='listFileName'>{original_filename}</p>
         <p className='listFileSizes'>
-          <span>{`${width} x ${height}px`}</span>
+          <span>{formatDimentions(width, height)}</span>
           <span>{formatBytes(bytes, 2)}</span>
         </p>
       </div>

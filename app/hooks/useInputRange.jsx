@@ -25,7 +25,9 @@ export default function useInputRange({ valueToModify, currentFile }) {
       scaleNumber.textContent = `x${(e.target.value / defaultValue).toFixed(2)}`
     }
 
-    const calculateScale = (value, decimals) => `x${(value / defaultValue).toFixed(decimals)}`
+    const calculateScale = (value, decimals) => {
+      return `x${(value / defaultValue).toFixed(decimals)}`
+    }
 
     return (
       <div className={`inputContainer ${valueToModify}`}>
