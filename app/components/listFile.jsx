@@ -8,19 +8,19 @@ export function ListFile({ currentFile, setCurrentFile, file }) {
   }
 
   return (
-    <li
+    <button
       className={`listFile ${currentFile?.asset_id === asset_id ? 'listFileActive' : ''}`}
       onClick={handleClick}
     >
       <img src={secure_url} className='listFileImg' />
-      <div className='listFileInfo'>
-        <p className='listFileName'>{original_filename}</p>
-        <p className='listFileSizes'>
+      <p className='listFileInfo'>
+        <span className='listFileName'>{original_filename}</span>
+        <span className='listFileSizes'>
           <span>{formatDimentions(width, height)}</span>
           <span>{formatBytes(bytes, 2)}</span>
-        </p>
-      </div>
-    </li>
+        </span>
+      </p>
+    </button>
 
   )
 }

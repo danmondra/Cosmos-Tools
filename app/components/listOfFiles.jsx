@@ -4,7 +4,7 @@ import { BtnDownload } from './btnDownload'
 export function ListOfFiles({ currentFile, setCurrentFile, files }) {
   return (
     <div className='listOfFilesContainer'>
-      <ul className='listOfFiles'>
+      <div className='listOfFiles'>
         {files.map(file => (
           <ListFile
             key={file.asset_id}
@@ -13,7 +13,7 @@ export function ListOfFiles({ currentFile, setCurrentFile, files }) {
             file={file}
           />
         ))}
-      </ul>
+      </div>
       {files.length > 1 &&
         <BtnDownload
           text='Download All'
