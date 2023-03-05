@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-export default function useAspectRatio() {
-  const [aspectRatio, setAspectRatio] = useState(false)
+export default function useAspectRatio({ defaultValue }) {
+  const [aspectRatio, setAspectRatio] = useState(defaultValue)
 
   function handleChange() {
     setAspectRatio(!aspectRatio)

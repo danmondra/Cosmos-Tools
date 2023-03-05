@@ -38,7 +38,7 @@ function ImageResizer() {
 
   const [InputRangeWidth, width] = useInputRange({ valueToModify: 'width', currentFile: currentImage })
   const [InputRangeHeight, height] = useInputRange({ valueToModify: 'height', currentFile: currentImage })
-  const [BtnAspectRatio, aspectRatio] = useAspectRatio()
+  const [BtnAspectRatio, aspectRatio] = useAspectRatio({ defaultValue: false })
 
   const { name, description } = constellations[0].stars[0]
 
@@ -149,7 +149,7 @@ function ImageResizer() {
               setCurrentFile={setCurrentImage}
               files={images}
             />
-          : <></>}
+          : <p className='dragndropText'>No images yet</p>}
       </section>
     </main>
   )
