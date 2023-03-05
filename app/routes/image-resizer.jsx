@@ -20,6 +20,7 @@ import { ImageViewer } from '~/components/imageViewer'
 import { FileInfo } from '~/components/fileInfo'
 import { ImageExamples } from '~/components/imageExamples'
 
+// Cloudinary
 import { Cloudinary } from '@cloudinary/url-gen'
 import { scale, fit } from '@cloudinary/url-gen/actions/resize'
 
@@ -32,7 +33,7 @@ export function meta() {
 }
 
 function ImageResizer() {
-  const [DragAndDrop, images, setUploadedImages] = useUploadFiles()
+  const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState({})
 
@@ -92,7 +93,7 @@ function ImageResizer() {
       }
       return file
     })
-    setUploadedImages(newImages)
+    upgradeImages(newImages)
   }
 
   return (
@@ -129,7 +130,7 @@ function ImageResizer() {
           : <>
             <ImageExamples
               fileExamples={imageExamples}
-              setUploadedFiles={setUploadedImages}
+              setUploadedFiles={simuleUpload}
             />
             </>}
       </section>
@@ -138,8 +139,7 @@ function ImageResizer() {
           <DragAndDrop />
           {currentImage?.original_filename &&
             <ImageViewer
-              src={currentImage.secure_url}
-              alt={currentImage.original_filename}
+              file={currentImage}
             />}
         </div>
 

@@ -13,6 +13,14 @@ export default function useUploadFiles() {
     setUploadedFiles([...files])
   }
 
+  function simuleUpload(files) {
+    setUploading(true)
+    setTimeout(() => {
+      setUploadedFiles([...files])
+      setUploading(false)
+    }, 1500)
+  }
+
   function handleChangeFile(e) {
     setUploading(true)
     const files = e.target.files
@@ -99,5 +107,5 @@ export default function useUploadFiles() {
     )
   }
 
-  return [DragAndDrop, uploadedFiles, upgradeFiles]
+  return [DragAndDrop, uploadedFiles, upgradeFiles, simuleUpload]
 }
