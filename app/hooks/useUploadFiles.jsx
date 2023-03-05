@@ -9,6 +9,10 @@ export default function useUploadFiles() {
   const [uploadedFiles, setUploadedFiles] = useState([])
   const [uploading, setUploading] = useState(false)
 
+  function upgradeFiles(files) {
+    setUploadedFiles([...files])
+  }
+
   function handleChangeFile(e) {
     setUploading(true)
     const files = e.target.files
@@ -95,5 +99,5 @@ export default function useUploadFiles() {
     )
   }
 
-  return [DragAndDrop, uploadedFiles, setUploadedFiles]
+  return [DragAndDrop, uploadedFiles, upgradeFiles]
 }

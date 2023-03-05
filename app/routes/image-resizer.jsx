@@ -34,7 +34,7 @@ export function meta() {
 function ImageResizer() {
   const [DragAndDrop, images, setUploadedImages] = useUploadFiles()
 
-  const [currentImage, setCurrentImage] = useState(images.length > 0 ? images[0] : {})
+  const [currentImage, setCurrentImage] = useState({})
 
   const [InputRangeWidth, width] = useInputRange({ valueToModify: 'width', currentFile: currentImage })
   const [InputRangeHeight, height] = useInputRange({ valueToModify: 'height', currentFile: currentImage })
@@ -125,13 +125,13 @@ function ImageResizer() {
             <FileInfo
               file={currentImage}
             />
-          </>
+            </>
           : <>
             <ImageExamples
               fileExamples={imageExamples}
               setUploadedFiles={setUploadedImages}
             />
-          </>}
+            </>}
       </section>
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>
