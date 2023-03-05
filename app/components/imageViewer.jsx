@@ -1,5 +1,6 @@
 export function ImageViewer({ file }) {
   const { secure_url, original_filename, asset_id } = file
+
   function handleLoad() {
     // setLoader false
   }

@@ -4,12 +4,24 @@ import useUploadFiles from '~/hooks/useUploadFiles'
 
 // Data
 import constellations from '~/data/constellations'
+import { imageExamples } from '~/data/imageExamples'
+
+// Services
+import { getFileInfo } from '~/services/getFileInfo'
 
 // Components
 import { BtnHome } from '~/components/btnHome'
+import { BtnDownload } from '~/components/btnDownload'
 import { ToolInfo } from '~/components/toolInfo'
 import { ImageViewer } from '~/components/imageViewer'
 import { ListOfFiles } from '~/components/listOfFiles'
+import { ImageExamples } from '~/components/imageExamples'
+import { FileInfo } from '~/components/fileInfo'
+
+// Libraries
+import { Cloudinary } from '@cloudinary/url-gen'
+import { crop } from '@cloudinary/url-gen/actions/resize'
+import Cropper from 'cropperjs'
 
 export function links() {
   return [
@@ -32,7 +44,7 @@ export function meta() {
 }
 
 function ImageCropper() {
-  const [DragAndDrop, images, upgradeImages] = useUploadFiles()
+  const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState({})
   const [instanceCropper, setInstanceCropper] = useState({})
@@ -59,22 +71,27 @@ function ImageCropper() {
       viewMode: 2,
       data: 'cropData' in currentImage ? currentImage.cropData : null,
       cropend() {
-        updateImage(cropper)
+        // Show preview
         const croppedImg = cropper.getCroppedCanvas().toDataURL('image/png')
         document.querySelector('#prueba').src = croppedImg
-      }
+      },
+      background: false,
+      modal: false
     })
 
     setInstanceCropper(cropper)
   }, [currentImage])
 
-  useEffect(() => {
-
-  }, [])
-
-  function updateImage(cropper) {
+  async function updateImage(img) {
     const newImage = { ...currentImage }
-    newImage.cropData = cropper.getData()
+
+    if (img) {
+      newImage.secure_url = img.toURL()
+
+      const urlImageInfo = img.addFlag('getinfo').toURL()
+      const imageInfo = await getFileInfo(urlImageInfo)
+      newImage.bytes = imageInfo?.output?.bytes
+    }
 
     setCurrentImage(newImage)
 
@@ -88,6 +105,20 @@ function ImageCropper() {
     upgradeImages(newImages)
   }
 
+  function cropImage() {
+    const { x, y, width, height } = instanceCropper.getData(true)
+
+    const cloudinary = new Cloudinary({
+      cloud: {
+        cloudName: 'dczm31ujx'
+      }
+    })
+
+    const img = cloudinary.image(currentImage.public_id).resize(crop().width(width).height(height).x(x).y(y))
+
+    updateImage(img)
+  }
+
   return (
     <>
       <main className='container main'>
@@ -97,14 +128,36 @@ function ImageCropper() {
           description={description}
         />
         <section className='stellarObjectsList fileOptionsContainer'>
-          <div className='previewCrop'>
-            <p className='fileInfoName'>
-              Preview:
-            </p>
-            <picture className='previewCropContainer'>
-              <img src={currentImage?.secure_url} alt={`Image of ${currentImage?.original_filename}`} id='prueba' className='previewCropImage' />
-            </picture>
-          </div>
+          {currentImage?.original_filename
+            ? <>
+              <div className='previewCrop'>
+                <p className='fileInfoName'>
+                  Preview:
+                </p>
+                <picture className='previewCropContainer'>
+                  <img src={currentImage?.secure_url} alt={`Image of ${currentImage?.original_filename}`} id='prueba' className='previewCropImage' />
+                </picture>
+              </div>
+              <div className='btnsCrop'>
+                <button
+                  className='btnCropImage'
+                  onClick={cropImage}
+                >
+                  Crop Image
+                </button>
+                <BtnDownload
+                  text='Download'
+                  files={currentImage}
+                />
+              </div>
+              <FileInfo
+                file={currentImage}
+              />
+              </>
+            : <ImageExamples
+                fileExamples={imageExamples}
+                setUploadedFiles={simuleUpload}
+              />}
         </section>
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
@@ -124,12 +177,6 @@ function ImageCropper() {
 
         </section>
       </main>
-      <script
-        src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha/cropper.min.js'
-        integrity='sha512-pfbxSnz2K5IoriSDRsDoM6d5VJXz+XqImI/g8VAF7DXZBs0+Uo+/l/mHRFgr9qm76l7nnDy917PehLkodduyzg=='
-        crossOrigin='anonymous'
-        referrerPolicy='no-referrer'
-      />
     </>
   )
 }
