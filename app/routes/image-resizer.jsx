@@ -18,11 +18,8 @@ import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageViewer } from '../components/imageViewer'
 import { FileInfo } from '../components/fileInfo'
 
-// Utils
-import { formatBytes } from '~/utils/formatBytes'
-
 import { Cloudinary } from '@cloudinary/url-gen'
-import { scale } from '@cloudinary/url-gen/actions/resize'
+import { scale, fit } from '@cloudinary/url-gen/actions/resize'
 
 export function meta() {
   return (
@@ -56,27 +53,7 @@ function ImageResizer() {
     resizeImage()
   }, [width, height, aspectRatio])
 
-  async function updateImage(img) {
-    const newImage = { ...currentImage }
-
-    newImage.width = width || newImage.widthOG
-    newImage.height = height || newImage.heightOG
-    newImage.secure_url = img.toURL()
-
-    const imageInfo = await getFileInfo(img.addFlag('getinfo').toURL())
-    newImage.bytes = imageInfo.output.bytes
-
-    setCurrentImage(newImage)
-
-    const newFiles = images.map(file => file.public_id === newImage.public_id ? newImage : file)
-    setResponses(newFiles)
-  }
-
   function resizeImage() {
-    if (aspectRatio) {
-      // TODO -- Aspect ratio
-    }
-
     const cloudinary = new Cloudinary({
       cloud: {
         cloudName: 'dczm31ujx'
@@ -84,9 +61,36 @@ function ImageResizer() {
     })
 
     const img = cloudinary.image(currentImage.public_id)
-      .resize(scale().width(width).height(height))
+
+    if (aspectRatio) {
+      img.resize(fit().width(width).height(height))
+    } else {
+      img.resize(scale().width(width).height(height))
+    }
 
     updateImage(img)
+  }
+
+  async function updateImage(img) {
+    const newImage = { ...currentImage }
+
+    newImage.width = width
+    newImage.height = height
+    newImage.secure_url = img.toURL()
+
+    const urlImageInfo = img.addFlag('getinfo').toURL()
+    const imageInfo = await getFileInfo(urlImageInfo)
+    newImage.bytes = imageInfo?.output?.bytes
+
+    setCurrentImage(newImage)
+
+    const newFiles = images.map(file => {
+      if (file.public_id === newImage.public_id) {
+        return newImage
+      }
+      return file
+    })
+    setResponses(newFiles)
   }
 
   return (
@@ -117,9 +121,7 @@ function ImageResizer() {
               />
             </form>
             <FileInfo
-              name={currentImage.original_filename}
-              size={formatBytes(currentImage.bytes, 2)}
-              dimentions={`${currentImage.width} x ${currentImage.height}px`}
+              file={currentImage}
             />
           </>}
       </section>

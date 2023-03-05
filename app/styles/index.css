@@ -80,12 +80,12 @@ img {
 
 .stellarObjectsList {
   background-image: linear-gradient(258deg, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
-  padding: 1.5rem 2rem;
+  padding: 2rem 2rem;
   border-radius: .3rem;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
@@ -105,12 +105,12 @@ img {
   align-items: center;
   cursor: pointer;
 
-  transition: box-shadow .5s ease, background-color .5s ease;
+  transition: border-color .5s ease, background-color .5s ease;
 }
 
 .stellarObject:hover {
-  box-shadow: 0 0 5px var(--secondary);
-  background-color: rgb(0 0 0 / .15);
+  border-color: var(--white);
+  background-color: rgb(0 0 0 / .25);
 }
 
 .star {
@@ -133,7 +133,7 @@ img {
 
 .nameTool {
   color: var(--white);
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   margin: 0;
   font-weight: normal;
 }
@@ -204,6 +204,7 @@ img {
   text-align: center;
   color: var(--white);
   margin: .5rem 0;
+  font-size: 1.6rem;
 }
 
 .constellationMap {
@@ -384,7 +385,7 @@ img {
 @media (min-width: 768px) {
   .imageUploadViewContainer {
     height: 60vh;
-    min-height: 35rem;
+    min-height: 45rem;
   }
 }
 
@@ -400,6 +401,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   transition: background-color .5s ease, transform .5s ease;
 }
@@ -471,6 +473,7 @@ img {
   flex-direction: column;
   gap: 1.5rem;
   max-height: 60vh;
+  overflow: auto;
 }
 
 .listFile {
@@ -527,4 +530,128 @@ img {
 .homeIcon {
   display: block;
   height: 32.4px;
+}
+
+/* UPLOADING SPACE */
+
+.uploadingSpaceContainer {
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+
+.uploadingSpace{
+  width: 100px;
+  height: 100px;  
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.circle{
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  filter: drop-shadow(0 0 10px var(--white));
+  border:1px solid transparent;
+  border-radius:50%;
+  position:absolute;
+  transition:1s;
+}
+
+.f-circle{
+  position:absolute;
+  width:95%;
+  height:95%;
+  left:2.5%;
+  top:2.5%;
+  border-radius:50%;
+  border:1px solid #fff;
+  animation: rotate 3s linear 0s infinite;
+}
+
+.f-circle::after{
+  content:"";
+  display:inline-block;
+  width:15px;
+  height:15px;
+  position:relative;
+  left: 65px;
+  border-radius:50%;
+  background-color: var(--primary);
+  filter: drop-shadow(0 0 3px #5e6cab);
+}
+
+/* second circle */
+.s-circle{
+  width:75%;
+  height:75%;
+  position:absolute;
+  top:calc(50% - 37.5%);
+  left:calc(50% - 37.5%);
+  border:1px solid #fff;
+  border-radius:50%;
+  animation: rotate 4s linear 0s infinite;
+}
+
+.s-circle::after{
+  content:"";
+  display:inline-block;
+  width: 15px;
+  height: 15px;
+  position:relative;
+  left: 50px;
+  border-radius:50%;
+  background-color: #567b9c;
+  filter: drop-shadow(0 0 3px #a7bccf);
+}
+
+/* third circle */
+.t-circle{
+  width:55%;
+  height:55%;
+  position:absolute;
+  left:calc(50% - 27.5%);
+  top:calc(50% - 27.5%);
+  border-radius:50%;
+  border:1px solid #fff;
+  animation: rotate 5s linear 0s infinite;
+}
+
+.t-circle::after{
+  content:"";
+  display:inline-block;
+  width: 10px;
+  height: 10px;
+  position:relative;
+  left: 40px;
+  border-radius:50%;
+  background-color: #000;
+  filter: drop-shadow(0 0 3px #fff);
+}
+
+/* keyframe rotate anmiation */
+@keyframes rotate{
+  from{
+    transform:rotate(360deg);
+  }
+  to{
+    transform:rotate(0deg);
+  }
+}
+
+
+.circle:hover{
+  width:120px;
+  height:120px;
+  top:calc(50% - 60px);
+  left:calc(50% - 60px);
+}
+
+.f-circle:hover ,
+.s-circle:hover ,
+.t-circle:hover
+{
+  border:2px solid #ccc;
+  padding:-1px;
 }
