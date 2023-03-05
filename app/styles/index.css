@@ -477,6 +477,7 @@ img {
 }
 
 .listFile {
+  all: unset;
   border: 2px solid var(--white);
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -506,6 +507,7 @@ img {
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  margin: 0;
 }
 
 .listFileName {
@@ -514,6 +516,7 @@ img {
   font-weight: bold;
 
   /* Only one line and text overflow with elypsis */
+  white-space: nowrap;
   max-width: 98%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -521,6 +524,7 @@ img {
 
 .listFileSizes {
   margin: 0;
+  font-size: 1.4rem;
   color: var(--white);
   display: flex;
   justify-content: space-between;
@@ -532,7 +536,60 @@ img {
   height: 32.4px;
 }
 
+/* Examples */
+
+.imagesExamples {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.examplesTitle {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--white);
+  font-weight: normal;
+}
+
+.examplesList {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.exampleImageContainer {
+  all: unset;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: .3rem;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  user-select: none;
+
+  transition: border .5s ease, transform .5s ease;
+}
+
+.exampleImageContainer:hover {
+  border: 2px solid var(--white);
+  transform: scale(1.04);
+}
+
+.exampleImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
 /* UPLOADING SPACE */
+/* Many many thanks to Yazan Qwaider who posted this amazing loader on codepen
+Link: https://codepen.io/YazanQ/pen/QWyEQBG */
 
 .uploadingSpaceContainer {
   position: absolute;

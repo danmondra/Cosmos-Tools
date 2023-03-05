@@ -6,6 +6,7 @@ import useAspectRatio from '~/hooks/useAspectRatio'
 
 // Data
 import constellations from '~/data/constellations'
+import { imageExamples } from '~/data/imageExamples'
 
 // Services
 import { getFileInfo } from '~/services/getFileInfo'
@@ -13,10 +14,11 @@ import { getFileInfo } from '~/services/getFileInfo'
 // Components
 import { BtnHome } from '~/components/btnHome'
 import { ToolInfo } from '~/components/toolInfo'
-import { BtnDownload } from '../components/btnDownload'
+import { BtnDownload } from '~/components/btnDownload'
 import { ListOfFiles } from '~/components/listOfFiles'
-import { ImageViewer } from '../components/imageViewer'
-import { FileInfo } from '../components/fileInfo'
+import { ImageViewer } from '~/components/imageViewer'
+import { FileInfo } from '~/components/fileInfo'
+import { ImageExamples } from '~/components/imageExamples'
 
 import { Cloudinary } from '@cloudinary/url-gen'
 import { scale, fit } from '@cloudinary/url-gen/actions/resize'
@@ -30,7 +32,7 @@ export function meta() {
 }
 
 function ImageResizer() {
-  const [DragAndDrop, images, setResponses] = useUploadFiles()
+  const [DragAndDrop, images, setUploadedImages] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState(images.length > 0 ? images[0] : {})
 
@@ -84,13 +86,13 @@ function ImageResizer() {
 
     setCurrentImage(newImage)
 
-    const newFiles = images.map(file => {
+    const newImages = images.map(file => {
       if (file.public_id === newImage.public_id) {
         return newImage
       }
       return file
     })
-    setResponses(newFiles)
+    setUploadedImages(newImages)
   }
 
   return (
@@ -101,8 +103,8 @@ function ImageResizer() {
         description={description}
       />
       <section className='stellarObjectsList fileOptionsContainer'>
-        {currentImage?.original_filename &&
-          <>
+        {currentImage?.original_filename
+          ? <>
             <form className='formOptionsImage'>
               <InputRangeWidth
                 group='resize'
@@ -122,6 +124,12 @@ function ImageResizer() {
             </form>
             <FileInfo
               file={currentImage}
+            />
+          </>
+          : <>
+            <ImageExamples
+              fileExamples={imageExamples}
+              setUploadedFiles={setUploadedImages}
             />
           </>}
       </section>
