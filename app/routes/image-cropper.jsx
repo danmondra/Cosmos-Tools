@@ -10,13 +10,14 @@ import { imageExamples } from '~/data/imageExamples'
 import { getFileInfo } from '~/services/getFileInfo'
 
 // Components
-import { BtnHome } from '~/components/btnHome'
 import { BtnDownload } from '~/components/btnDownload'
-import { ToolInfo } from '~/components/toolInfo'
+import { BtnHome } from '~/components/btnHome'
+import { FileInfo } from '~/components/fileInfo'
+import { ImageExamples } from '~/components/imageExamples'
+import { ImagePreview } from '~/components/imagePreview'
 import { ImageViewer } from '~/components/imageViewer'
 import { ListOfFiles } from '~/components/listOfFiles'
-import { ImageExamples } from '~/components/imageExamples'
-import { FileInfo } from '~/components/fileInfo'
+import { ToolInfo } from '~/components/toolInfo'
 
 // Libraries
 import { Cloudinary } from '@cloudinary/url-gen'
@@ -76,11 +77,10 @@ function ImageCropper() {
 
     const cropper = new Cropper(img, {
       viewMode: 2,
-      data: 'cropData' in currentImage ? currentImage.cropData : null,
       cropend() {
         // Show preview
         const croppedImg = cropper.getCroppedCanvas().toDataURL('image/png')
-        document.querySelector('#prueba').src = croppedImg
+        document.querySelector('#imagePreview').src = croppedImg
       },
       background: false,
       modal: false
@@ -98,7 +98,13 @@ function ImageCropper() {
       }
     })
 
-    const img = cloudinary.image(currentImage.public_id).resize(crop().width(width).height(height).x(x).y(y))
+    const img = cloudinary.image(currentImage.public_id)
+
+    if (currentImage?.lastResize) {
+      img.resize(crop().width(width).height(height).x(x + currentImage.lastResize.x).y(y + currentImage.lastResize.y))
+    } else {
+      img.resize(crop().width(width).height(height).x(x).y(y))
+    }
 
     updateImage(img)
   }
@@ -106,12 +112,20 @@ function ImageCropper() {
   async function updateImage(img) {
     const newImage = { ...currentImage }
 
-    if (img) {
-      newImage.secure_url = img.toURL()
+    newImage.secure_url = img.toURL()
 
-      const urlImageInfo = img.addFlag('getinfo').toURL()
-      const imageInfo = await getFileInfo(urlImageInfo)
-      newImage.bytes = imageInfo?.output?.bytes
+    const urlImageInfo = img.addFlag('getinfo').toURL()
+    const imageInfo = await getFileInfo(urlImageInfo)
+    newImage.bytes = imageInfo.output.bytes
+    newImage.width = imageInfo.output.width
+    newImage.height = imageInfo.output.height
+
+    // adapt the coordinates to the new image
+    if (currentImage?.lastResize) {
+      const { x, y } = instanceCropper.getData(true)
+      newImage.lastResize = { x: newImage.lastResize.x + x, y: newImage.lastResize.y + y }
+    } else {
+      newImage.lastResize = { x: imageInfo.resize[0].x, y: imageInfo.resize[0].y }
     }
 
     setCurrentImage(newImage)
@@ -134,17 +148,13 @@ function ImageCropper() {
           name={name}
           description={description}
         />
+
         <section className='stellarObjectsList fileOptionsContainer'>
           {currentImage?.original_filename
             ? <>
-              <div className='previewCrop'>
-                <p className='fileInfoName'>
-                  Preview:
-                </p>
-                <picture className='previewCropContainer'>
-                  <img src={currentImage?.secure_url} alt={`Image of ${currentImage?.original_filename}`} id='prueba' className='previewCropImage' />
-                </picture>
-              </div>
+              <ImagePreview
+                image={currentImage}
+              />
               <div className='btnsCrop'>
                 <button
                   className='btnCropImage'
@@ -166,6 +176,7 @@ function ImageCropper() {
                 setUploadedFiles={simuleUpload}
               />}
         </section>
+
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
@@ -183,6 +194,7 @@ function ImageCropper() {
             : <p className='dragndropText'>No images yet</p>}
 
         </section>
+
       </main>
     </>
   )

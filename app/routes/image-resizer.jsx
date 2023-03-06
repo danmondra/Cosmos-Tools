@@ -1,7 +1,7 @@
 // Hooks
 import { useState, useEffect } from 'react'
 import useUploadFiles from '~/hooks/useUploadFiles'
-import useInputRange from '~/hooks/useInputRange'
+import useInputSize from '~/hooks/useInputSize'
 import useAspectRatio from '~/hooks/useAspectRatio'
 
 // Data
@@ -37,21 +37,24 @@ function ImageResizer() {
 
   const [currentImage, setCurrentImage] = useState({})
 
-  const [InputRangeWidth, width] = useInputRange({ valueToModify: 'width', currentFile: currentImage })
-  const [InputRangeHeight, height] = useInputRange({ valueToModify: 'height', currentFile: currentImage })
+  const [InputRangeWidth, width] = useInputSize({ valueToModify: 'width', currentFile: currentImage })
+  const [InputRangeHeight, height] = useInputSize({ valueToModify: 'height', currentFile: currentImage })
   const [BtnAspectRatio, aspectRatio] = useAspectRatio({ defaultValue: false })
 
   const { name, description } = constellations[0].stars[0]
 
   useEffect(() => {
     if (images.length === 0) return
-    if (currentImage?.original_filename) return
+
+    const imageExists = currentImage?.original_filename
+    if (imageExists) return
 
     setCurrentImage(images[0])
   }, [images])
 
   useEffect(() => {
-    if (!currentImage?.original_filename) return
+    const imageExists = currentImage?.original_filename
+    if (!imageExists) return
 
     resizeImage()
   }, [width, height, aspectRatio])
