@@ -80,12 +80,11 @@ function ImageResizer() {
   async function updateImage(img) {
     const newImage = { ...currentImage }
 
-    newImage.width = width
-    newImage.height = height
     newImage.secure_url = img.toURL()
 
     const urlImageInfo = img.addFlag('getinfo').toURL()
     const imageInfo = await getFileInfo(urlImageInfo)
+
     newImage.bytes = imageInfo.output.bytes
     newImage.width = imageInfo.output.width
     newImage.height = imageInfo.output.height
@@ -134,13 +133,13 @@ function ImageResizer() {
             <FileInfo
               file={currentImage}
             />
-          </>
+            </>
           : <>
             <ImageExamples
               fileExamples={imageExamples}
               setUploadedFiles={simuleUpload}
             />
-          </>}
+            </>}
       </section>
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>

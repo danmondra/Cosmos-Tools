@@ -45,9 +45,9 @@ const constellations = [
     stars: [
       {
         name: 'Alpheratz',
-        description: 'Thumbnail creator',
+        description: 'Profile picture creator',
         id: 'alpheratz',
-        url: 'thumbnail-creator',
+        url: 'profile-picture',
         color: '#fff',
         shadow: '#fff',
         width: '8rem',

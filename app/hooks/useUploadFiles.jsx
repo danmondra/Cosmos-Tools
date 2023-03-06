@@ -13,12 +13,12 @@ export default function useUploadFiles() {
     setUploadedFiles([...files])
   }
 
-  function simuleUpload(files) {
+  function simuleUpload(files, delay) {
     setUploading(true)
     setTimeout(() => {
       setUploadedFiles([...files])
       setUploading(false)
-    }, 1500)
+    }, delay)
   }
 
   function handleChangeFile(e) {

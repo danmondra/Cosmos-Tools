@@ -13,7 +13,10 @@ export function meta() {
       charset: 'utf-8',
       title: 'Cosmos Tools',
       viewport: 'width=device-width,initial-scale=1',
-      description: 'CosmosTools is a collections of tools to help you manipulate images and videos'
+      description: 'Transform Your Content into a Universe of Multimedia Wonders: Stellar Tools and Constellations of Creativity',
+      'og:image': 'https://res.cloudinary.com/dczm31ujx/image/upload/v1678141411/starsInSpace_1_bnrnz6.jpg',
+      'og:title': 'Stellar Multimedia Content Creation Tools',
+      'og:description': 'Transform Your Content into a Universe of Multimedia Wonders: Stellar Tools and Constellations of Creativity'
     }
   )
 }
