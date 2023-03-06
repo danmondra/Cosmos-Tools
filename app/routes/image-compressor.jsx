@@ -14,10 +14,10 @@ import { getFileInfo } from '~/services/getFileInfo'
 import { BtnHome } from '~/components/btnHome'
 import { BtnDownload } from '~/components/btnDownload'
 import { ToolInfo } from '~/components/toolInfo'
-import { ImageViewer } from '~/components/imageViewer'
 import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageExamples } from '~/components/imageExamples'
 import { FileInfo } from '~/components/fileInfo'
+import { ImagesComparator } from '../components/imageComparator'
 
 // Libraries
 import { Cloudinary } from '@cloudinary/url-gen'
@@ -121,11 +121,11 @@ function ImageCompressor() {
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
-            {currentImage?.original_filename &&
-              <>
-
-              </>}
-
+            {currentImage?.original_filename && (
+              <ImagesComparator
+                currentImage={currentImage}
+              />
+            )}
           </div>
           {currentImage?.original_filename
             ? <ListOfFiles

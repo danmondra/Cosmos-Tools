@@ -31,7 +31,7 @@ export default function useInputCompress({ valueToModify }) {
           onMouseUp={handleMouseUp}
           onChange={handleChange}
         />
-        <p className='rangeSize sizeCompressed'>-{formatBytes(sizeOG - size, 2)}</p>
+        <p className='rangeSize sizeCompressed'>- {formatBytes(sizeOG - size, 2)}</p>
       </div>
     )
   }

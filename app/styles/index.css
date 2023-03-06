@@ -459,6 +459,7 @@ img {
   justify-content: center;
   align-items: center;
   height: calc(65% - 2rem);
+  overflow: hidden;
 }
 
 .imageView {
@@ -466,6 +467,7 @@ img {
   display: block;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 /* List of Files */
@@ -778,3 +780,58 @@ img {
   background-color: rgb(255 255 255 / .2);
 }
 
+/* TWO-UP */
+two-up {
+  --accent-color: var(--primary) !important;
+  --track-color: #000000 !important;
+  --thumb-color: #ffffff !important;
+  --thumb-background: var(--primary) !important;
+  --thumb-size: 45px !important;
+  --bar-size: 6px;
+  --bar-touch-size: 30px;
+}
+
+.compareImages {
+  position: relative;
+}
+
+.compareImagesTypeView {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.compareImagesViewBtn {
+  all: unset;
+  background: #000000;
+  border-radius: .5rem;
+  opacity: .6;
+  margin: 1rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: block;
+  aspect-ratio: 1/1;
+  padding: .3rem;
+  border: 1px var(--white) solid;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  transition: transform .5s ease, opacity .5s ease;
+}
+
+.compareImagesViewBtn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.imageViewTwoUp {
+  max-height: 28rem;
+  object-fit: contain;
+}
+
+.imageViewTwoUp.zoom {
+  object-fit: cover;
+}
