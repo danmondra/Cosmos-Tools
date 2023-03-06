@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import useUploadFiles from '~/hooks/useUploadFiles'
 import useInputSize from '~/hooks/useInputSize'
-import useAspectRatio from '~/hooks/useAspectRatio'
 
 // Data
 import constellations from '~/data/constellations'
@@ -15,6 +14,7 @@ import { getFileInfo } from '~/services/getFileInfo'
 import { BtnHome } from '~/components/btnHome'
 import { ToolInfo } from '~/components/toolInfo'
 import { BtnDownload } from '~/components/btnDownload'
+import { BtnsProportions } from '~/components/btnsProportions'
 import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageViewer } from '~/components/imageViewer'
 import { FileInfo } from '~/components/fileInfo'
@@ -22,7 +22,7 @@ import { ImageExamples } from '~/components/imageExamples'
 
 // Cloudinary
 import { Cloudinary } from '@cloudinary/url-gen'
-import { scale, fit } from '@cloudinary/url-gen/actions/resize'
+import { scale as cloudinaryScale, fit } from '@cloudinary/url-gen/actions/resize'
 
 export function meta() {
   return (
@@ -39,7 +39,6 @@ function ImageResizer() {
 
   const [InputRangeWidth, width] = useInputSize({ valueToModify: 'width', currentFile: currentImage })
   const [InputRangeHeight, height] = useInputSize({ valueToModify: 'height', currentFile: currentImage })
-  const [BtnAspectRatio, aspectRatio] = useAspectRatio({ defaultValue: false })
 
   const { name, description } = constellations[0].stars[0]
 
@@ -57,9 +56,9 @@ function ImageResizer() {
     if (!imageExists) return
 
     resizeImage()
-  }, [width, height, aspectRatio])
+  }, [width, height])
 
-  function resizeImage() {
+  function resizeImage(scale) {
     const cloudinary = new Cloudinary({
       cloud: {
         cloudName: 'dczm31ujx'
@@ -68,10 +67,10 @@ function ImageResizer() {
 
     const img = cloudinary.image(currentImage.public_id)
 
-    if (aspectRatio) {
-      img.resize(fit().width(width).height(height))
+    if (scale) {
+      img.resize(fit().width(Math.floor(width * scale)).height(Math.floor(height * scale)))
     } else {
-      img.resize(scale().width(width).height(height))
+      img.resize(cloudinaryScale().width(width).height(height))
     }
 
     updateImage(img)
@@ -86,7 +85,9 @@ function ImageResizer() {
 
     const urlImageInfo = img.addFlag('getinfo').toURL()
     const imageInfo = await getFileInfo(urlImageInfo)
-    newImage.bytes = imageInfo?.output?.bytes
+    newImage.bytes = imageInfo.output.bytes
+    newImage.width = imageInfo.output.width
+    newImage.height = imageInfo.output.height
 
     setCurrentImage(newImage)
 
@@ -119,7 +120,10 @@ function ImageResizer() {
                 defaultValue={currentImage.heightOG}
               />
 
-              <BtnAspectRatio />
+              <BtnsProportions
+                proportions={[0.1, 0.5, 1, 2]}
+                resizeImage={resizeImage}
+              />
 
               <BtnDownload
                 text='Download'
@@ -129,13 +133,13 @@ function ImageResizer() {
             <FileInfo
               file={currentImage}
             />
-            </>
+          </>
           : <>
             <ImageExamples
               fileExamples={imageExamples}
               setUploadedFiles={simuleUpload}
             />
-            </>}
+          </>}
       </section>
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>

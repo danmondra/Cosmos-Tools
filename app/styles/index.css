@@ -321,6 +321,36 @@ img {
   background-color: rgb( 255 255 255 / .3 );
 }
 
+/* BUTTONS SCALE */
+
+.proportionBtns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem
+}
+
+.proportionBtn {
+  all: unset;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+  flex: 1;
+  color: var(--white);
+  border: 3px var(--white) solid;
+  text-align: center;
+  border-radius: .3rem;
+  padding: .5rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: background-color .5s ease, transform .5s ease;
+}
+
+.proportionBtn:hover {
+  background-color: rgb(255 255 255 / .2);
+  transform: scale(1.06);
+}
 
 /* Button Download */
 

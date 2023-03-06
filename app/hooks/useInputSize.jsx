@@ -39,7 +39,7 @@ export default function useInputSize({ valueToModify, currentFile }) {
           id={valueToModify}
           type='range'
           name={group}
-          max={defaultValue * 3}
+          max={defaultValue * 2}
           min='1'
           defaultValue={value}
           onMouseUp={handleMouseUp}
