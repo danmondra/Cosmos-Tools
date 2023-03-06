@@ -275,6 +275,11 @@ img {
   color: var(--white);
 }
 
+.sizeCompressed {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
 .aspectRatio {
   align-self: flex-end;
   display: flex;

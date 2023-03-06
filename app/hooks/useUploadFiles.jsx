@@ -38,6 +38,7 @@ export default function useUploadFiles() {
       original_filename: file.original_filename,
       public_id: file.public_id,
       secure_url: file.secure_url,
+      secure_urlOG: file.secure_url,
       width: file.width,
       widthOG: file.width
     }
@@ -102,7 +103,7 @@ export default function useUploadFiles() {
               onChange={handleChangeFile}
               multiple
             />
-            </>}
+          </>}
       </div>
     )
   }
