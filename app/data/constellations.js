@@ -27,9 +27,9 @@ const constellations = [
       },
       {
         name: 'Adhara',
-        description: 'Image scaler',
+        description: 'Image compressor',
         id: 'adhara',
-        url: 'image-scaler',
+        url: 'image-compressor',
         color: '#8BA5E9',
         shadow: '#3A69C6',
         width: '5rem',
