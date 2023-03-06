@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function useInputRange({ valueToModify, currentFile }) {
+export default function useInputSize({ valueToModify, currentFile }) {
   const [value, setValue] = useState(undefined)
 
   function handleMouseUp(e) {

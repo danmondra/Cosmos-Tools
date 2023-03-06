@@ -1,4 +1,5 @@
 export function formatBytes(bytes, decimals = 2) {
+  if (bytes === 0) return '0KB'
   if (!+bytes) return 'Not available'
 
   const sizeByte = 1024
