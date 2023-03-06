@@ -1,4 +1,4 @@
-import { Outlet, Meta, Links, LiveReload, Scripts } from '@remix-run/react'
+import { Outlet, Meta, Links, LiveReload, Scripts, useCatch, Link } from '@remix-run/react'
 
 import { StarsBackground } from '~/components/starsBackground'
 import { Header } from '~/components/header'
@@ -76,5 +76,27 @@ function Document({ children }) {
         <LiveReload />
       </body>
     </html>
+  )
+}
+
+// MANEJO DE ERRORES
+
+export function CatchBoundary() {
+  const error = useCatch()
+
+  return (
+    <Document>
+      <p className='messageError'>{error.status} <br /> This page will be displayed when the project review is approaching.</p>
+      <Link className='messageErrorLink' to='/'>Constellations</Link>
+    </Document>
+  )
+}
+
+export function ErrorBoundary({ error }) {
+  return (
+    <Document>
+      <p className='messageError'>{error.status} <br /> This page will be displayed when the project review is approaching.</p>
+      <Link className='messageErrorLink' to='/'>Constellations</Link>
+    </Document>
   )
 }

@@ -896,3 +896,18 @@ two-up {
 .imageViewTwoUp.zoom {
   object-fit: cover;
 }
+
+/* ERROR MESSAGE */
+
+.messageError {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--white);
+}
+
+.messageErrorLink {
+  display: block;
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--white);
+}

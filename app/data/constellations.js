@@ -22,7 +22,7 @@ const constellations = [
         url: 'image-cropper',
         color: '#9C5A1C',
         shadow: '#C50000',
-        width: '10rem',
+        width: '12rem',
         position: { top: '3%', left: '60%' }
       },
       {
@@ -44,34 +44,34 @@ const constellations = [
     rol: 'Creators',
     stars: [
       {
+        name: 'Mirach',
+        description: 'Background Remover',
+        id: 'mirach',
+        url: 'background-remover',
+        color: '#a83b0f',
+        shadow: '#a35b34',
+        width: '10rem',
+        position: { top: '50%', left: '15%' }
+      },
+      {
         name: 'Alpheratz',
         description: 'Profile picture creator',
         id: 'alpheratz',
         url: 'profile-picture',
         color: '#fff',
         shadow: '#fff',
-        width: '8rem',
-        position: { top: '10%', left: '25%' }
-      },
-      {
-        name: 'Mirach',
-        description: 'Background Remover',
-        id: 'mirach',
-        url: 'background-remover',
-        color: '#9C5A1C',
-        shadow: '#C50000',
-        width: '10rem',
-        position: { top: '3%', left: '60%' }
+        width: '9rem',
+        position: { top: '-20%', left: '50%' }
       },
       {
         name: 'Almach',
         description: 'Celebrity Detection',
         id: 'almach',
         url: 'celebrity-detection',
-        color: '#8BA5E9',
-        shadow: '#3A69C6',
-        width: '5rem',
-        position: { top: '0%', left: '40%' }
+        color: '#d6a438',
+        shadow: '#edd093',
+        width: '8rem',
+        position: { top: '0%', left: '55%' }
       }
     ]
   },
@@ -86,30 +86,30 @@ const constellations = [
         description: 'Video cropper',
         id: 'enif',
         url: 'video-cropper',
-        color: '#fff',
-        shadow: '#fff',
+        color: '#b57847',
+        shadow: '#b8580b',
         width: '8rem',
-        position: { top: '10%', left: '25%' }
+        position: { top: '50%', left: '75%' }
       },
       {
         name: 'Scheat',
         description: 'Video Transcriptor',
         id: 'scheat',
         url: 'background-remover',
-        color: '#9C5A1C',
-        shadow: '#C50000',
+        color: '#593c1e',
+        shadow: '#300b23',
         width: '10rem',
-        position: { top: '3%', left: '60%' }
+        position: { top: '-10%', left: '20%' }
       },
       {
         name: 'Markab',
         description: 'Reducer video size',
         id: 'markab',
         url: 'celebrity-detection',
-        color: '#8BA5E9',
-        shadow: '#3A69C6',
+        color: '#4cb2c7',
+        shadow: '#00d3ff',
         width: '5rem',
-        position: { top: '0%', left: '40%' }
+        position: { top: '-30%', left: '40%' }
       }
     ]
   }

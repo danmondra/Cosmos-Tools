@@ -38,7 +38,7 @@ function ProfilePicture() {
 
   const [currentImage, setCurrentImage] = useState({})
 
-  const { name, description } = constellations[1].stars[0]
+  const { name, description } = constellations[1].stars[1]
 
   useEffect(() => {
     if (images.length === 0) return
