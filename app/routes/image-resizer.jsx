@@ -14,7 +14,7 @@ import { getFileInfo } from '~/services/getFileInfo'
 import { BtnHome } from '~/components/btnHome'
 import { ToolInfo } from '~/components/toolInfo'
 import { BtnDownload } from '~/components/btnDownload'
-import { BtnsProportions } from '~/components/btnsProportions'
+import { BtnsScale } from '~/components/btnsScale'
 import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageViewer } from '~/components/imageViewer'
 import { FileInfo } from '~/components/fileInfo'
@@ -68,7 +68,8 @@ function ImageResizer() {
     const img = cloudinary.image(currentImage.public_id)
 
     if (scale) {
-      img.resize(fit().width(Math.floor(width * scale)).height(Math.floor(height * scale)))
+      const { widthOG, heightOG } = currentImage
+      img.resize(fit().width(Math.floor(widthOG * scale)).height(Math.floor(heightOG * scale)))
     } else {
       img.resize(cloudinaryScale().width(width).height(height))
     }
@@ -120,7 +121,7 @@ function ImageResizer() {
                 defaultValue={currentImage.heightOG}
               />
 
-              <BtnsProportions
+              <BtnsScale
                 proportions={[0.1, 0.5, 1, 2]}
                 resizeImage={resizeImage}
               />

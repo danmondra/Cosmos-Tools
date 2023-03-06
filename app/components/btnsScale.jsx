@@ -1,4 +1,4 @@
-export function BtnsProportions({ proportions, resizeImage }) {
+export function BtnsScale({ proportions, resizeImage }) {
   return (
     <div className='proportionBtns'>
       {proportions.map(n => (
