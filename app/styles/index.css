@@ -488,7 +488,7 @@ img {
 @media (min-width: 768px) {
   .imageUploadViewContainer {
     height: 60vh;
-    min-height: 60rem;
+    min-height: 45rem;
   }
 }
 
