@@ -58,8 +58,8 @@ const constellations = [
         description: 'Profile picture creator',
         id: 'alpheratz',
         url: 'profile-picture',
-        color: '#fff',
-        shadow: '#fff',
+        color: '#abf',
+        shadow: '#54A9FA',
         width: '9rem',
         position: { top: '-20%', left: '50%' }
       },
@@ -68,8 +68,8 @@ const constellations = [
         description: 'Celebrity Detection',
         id: 'almach',
         url: 'celebrity-detection',
-        color: '#d6a438',
-        shadow: '#edd093',
+        color: '#5a2204',
+        shadow: '#2e0b0b',
         width: '8rem',
         position: { top: '0%', left: '55%' }
       }
@@ -95,7 +95,7 @@ const constellations = [
         name: 'Scheat',
         description: 'Video Transcriptor',
         id: 'scheat',
-        url: 'background-remover',
+        url: 'video-transcriptor',
         color: '#593c1e',
         shadow: '#300b23',
         width: '10rem',
@@ -109,7 +109,7 @@ const constellations = [
         color: '#4cb2c7',
         shadow: '#00d3ff',
         width: '5rem',
-        position: { top: '-30%', left: '40%' }
+        position: { top: '0%', left: '20%' }
       }
     ]
   }
