@@ -61,6 +61,9 @@ img {
 /* Main */
 
 .main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -83,7 +86,6 @@ img {
   box-shadow: 2px 0px 20px 1px #000000;
   padding: 2rem 2rem;
   border-radius: .3rem;
-  min-height: 60vh;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -91,6 +93,7 @@ img {
 
 @media (min-width: 768px) {
   .stellarObjectsList {
+    min-height: 60vh;
   }
 }
 
@@ -146,20 +149,30 @@ img {
 /* Navigation */
 
 .navigation {
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-image: linear-gradient(258deg, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
   box-shadow: 2px 0px 20px 1px #000000;
   padding: .5rem;
-  max-width: max-content;
   margin: 0 auto;
   border-radius: .3rem;
   gap: .5rem;
 }
 
+@media (min-width: 768px) {
+  .navigation {
+    flex-direction: row;
+    max-width: max-content;
+    width: unset;
+  }
+}
+
 .navigationBtn {
-  padding: .2rem 3rem;
+  width: 100%;
+  padding: 1rem 2rem;
   flex: 1;
   color: var(--white);
   border-radius: .3rem;
@@ -169,6 +182,13 @@ img {
   cursor: pointer;
 
   transition: background-color .5s ease;
+}
+
+@media (min-width: 768px) {
+  .navigationBtn {
+    padding: .2rem 3rem;
+
+  }
 }
 
 .navigationBtn:hover,
@@ -197,6 +217,12 @@ img {
 .constellation {
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .constellationNameContainer {
+    height: 32.4px;
+  }
 }
 
 .constellationName {
@@ -469,6 +495,9 @@ img {
 /* Tool Container */
 
 .toolContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -497,6 +526,7 @@ img {
   padding: 1rem;
   background-color: rgb( 255 255 255 / .1 );
   min-height: min-content;
+  min-height: 8rem;
   height: 35%;
   border: 3px var(--primary) dashed;
   border-radius: .5rem;
@@ -514,23 +544,48 @@ img {
   transform: scale(1.03);
 }
 
-.cloudIcon {
-  fill: #ffffff60;
-  max-width: 2rem;
+.dragndrop svg {
+  display: none;
+}
+
+
+@media (min-width: 768px) {
+
+  .dragndrop svg {
+    display: block;
+  }
+  .cloudIcon {
+    fill: #ffffff60;
+    max-width: 2rem;
+  }
 }
 
 .dragndropText {
-  text-align: center;
-  font-size: 2.5rem;
-  color: rgb(255 255 255 / .6);
-  margin: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .dragndropText {
+    display: block;
+    text-align: center;
+    font-size: 2.5rem;
+    color: rgb(255 255 255 / .6);
+    margin: 0;
+  }
 }
 
 .dragndropOr {
-  text-align: center;
-  font-size: 1.8rem;
-  color: rgb(255 255 255 / .6);
-  margin: 0;
+  display: none;
+}
+
+@media(min-width: 768px) {
+  .dragndropOr {
+    display: block;
+    text-align: center;
+    font-size: 1.8rem;
+    color: rgb(255 255 255 / .6);
+    margin: 0;
+  }
 }
 
 .browseFiles {
@@ -574,8 +629,15 @@ img {
 }
 
 .placeholderText {
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .placeholderText {
+    display: block;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .imagePlaceholder {
