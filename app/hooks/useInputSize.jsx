@@ -8,7 +8,7 @@ export default function useInputSize({ valueToModify, currentFile }) {
   }
 
   useEffect(() => {
-    if (!currentFile?.original_filename) return
+    if (!currentFile?.originalFilename) return
 
     const currentValue = currentFile[valueToModify]
     setValue(currentValue)

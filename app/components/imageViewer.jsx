@@ -1,13 +1,13 @@
 export function ImageViewer({ file }) {
-  const { secure_url, original_filename, asset_id } = file
+  const { secureUrl, originalFilename, assetId } = file
 
   function handleLoad() {
     // setLoader false
   }
 
   return (
-    <picture className='imageViewContainer' data-imageid={asset_id}>
-      <img src={secure_url} alt={`Image of ${original_filename}`} className='imageView' onLoad={handleLoad} />
+    <picture className='imageViewContainer' data-imageid={assetId}>
+      <img src={secureUrl} alt={`Image of ${originalFilename}`} className='imageView' onLoad={handleLoad} />
     </picture>
   )
 }

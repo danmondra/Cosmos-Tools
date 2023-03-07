@@ -23,13 +23,13 @@ export function ImageExamples({ fileExamples, setUploadedFiles, group }) {
       >
         {fileExamples.map(file => (
           <button
-            key={file.asset_id}
+            key={file.assetId}
             className='exampleImageContainer'
             onClick={() => {
               handleClick(file)
             }}
           >
-            <img src={file.url_minified} alt='Example image to upload to cloudinary' className='exampleImage' />
+            <img src={file.urlMinified} alt='Example image to upload to cloudinary' className='exampleImage' />
           </button>
         ))}
       </div>

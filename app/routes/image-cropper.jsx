@@ -55,14 +55,14 @@ function ImageCropper() {
   useEffect(() => {
     if (images.length === 0) return
 
-    const imageExists = currentImage?.original_filename
+    const imageExists = currentImage?.originalFilename
     if (imageExists) return
 
     setCurrentImage(images[0])
   }, [images])
 
   useEffect(() => {
-    const imageExists = currentImage?.original_filename
+    const imageExists = currentImage?.originalFilename
     if (!imageExists) return
 
     createCropper()
@@ -98,7 +98,7 @@ function ImageCropper() {
       }
     })
 
-    const img = cloudinary.image(currentImage.public_id)
+    const img = cloudinary.image(currentImage.publicId)
 
     if (currentImage?.lastResize) {
       img.resize(crop().width(width).height(height).x(x + currentImage.lastResize.x).y(y + currentImage.lastResize.y))
@@ -112,7 +112,7 @@ function ImageCropper() {
   async function updateImage(img) {
     const newImage = { ...currentImage }
 
-    newImage.secure_url = img.toURL()
+    newImage.secureUrl = img.toURL()
 
     const urlImageInfo = img.addFlag('getinfo').toURL()
     const imageInfo = await getFileInfo(urlImageInfo)
@@ -131,7 +131,7 @@ function ImageCropper() {
     setCurrentImage(newImage)
 
     const newImages = images.map(image => {
-      if (image.asset_id === newImage.asset_id) {
+      if (image.assetId === newImage.assetId) {
         return newImage
       }
       return image
@@ -150,7 +150,7 @@ function ImageCropper() {
         />
 
         <section className='stellarObjectsList fileOptionsContainer'>
-          {currentImage?.original_filename
+          {currentImage?.originalFilename
             ? <>
               <ImagePreview
                 image={currentImage}
@@ -170,7 +170,7 @@ function ImageCropper() {
               <FileInfo
                 file={currentImage}
               />
-            </>
+              </>
             : <ImageExamples
                 fileExamples={imageExamples}
                 setUploadedFiles={simuleUpload}
@@ -180,12 +180,12 @@ function ImageCropper() {
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
-            {currentImage?.original_filename &&
+            {currentImage?.originalFilename &&
               <ImageViewer
                 file={currentImage}
               />}
           </div>
-          {currentImage?.original_filename
+          {currentImage?.originalFilename
             ? <ListOfFiles
                 currentFile={currentImage}
                 setCurrentFile={setCurrentImage}

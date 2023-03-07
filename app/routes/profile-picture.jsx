@@ -43,7 +43,7 @@ function ProfilePicture() {
   useEffect(() => {
     if (images.length === 0) return
 
-    const imageExists = currentImage?.original_filename
+    const imageExists = currentImage?.originalFilename
     if (imageExists) return
 
     setCurrentImage(images[0])
@@ -53,7 +53,7 @@ function ProfilePicture() {
     if (images.length === 0) return
 
     images.forEach((image) => {
-      if (!image.profile_picture) {
+      if (!image.profilePicture) {
         createProfilePicture(image)
       }
     })
@@ -66,7 +66,7 @@ function ProfilePicture() {
       }
     })
 
-    const cloudinaryImg = cloudinary.image(image.public_id).resize(
+    const cloudinaryImg = cloudinary.image(image.publicId).resize(
       fill()
         .width(256)
         .height(256)
@@ -79,8 +79,8 @@ function ProfilePicture() {
   async function updateImage(img, cloudinaryImg) {
     const newImage = { ...img }
 
-    newImage.profile_picture = cloudinaryImg.toURL()
-    newImage.secure_url = cloudinaryImg.toURL()
+    newImage.profilePicture = cloudinaryImg.toURL()
+    newImage.secureUrl = cloudinaryImg.toURL()
 
     const urlImageInfo = cloudinaryImg.addFlag('getinfo').toURL()
     const imageInfo = await getFileInfo(urlImageInfo)
@@ -92,7 +92,7 @@ function ProfilePicture() {
     setCurrentImage(newImage)
 
     const newImages = images.map(file => {
-      if (file.public_id === newImage.public_id) {
+      if (file.publicId === newImage.publicId) {
         return newImage
       }
       return file
@@ -111,7 +111,7 @@ function ProfilePicture() {
         />
 
         <section className='stellarObjectsList fileOptionsContainer'>
-          {currentImage?.original_filename
+          {currentImage?.originalFilename
             ? <>
               <BtnDownload
                 text='Download'
@@ -131,13 +131,13 @@ function ProfilePicture() {
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
-            {currentImage?.original_filename && (
+            {currentImage?.originalFilename && (
               <ImageViewer
                 file={currentImage}
               />
             )}
           </div>
-          {currentImage?.original_filename
+          {currentImage?.originalFilename
             ? <ListOfFiles
                 currentFile={currentImage}
                 setCurrentFile={setCurrentImage}

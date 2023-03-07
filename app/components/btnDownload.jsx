@@ -16,12 +16,12 @@ export function BtnDownload({ text, files }) {
       toDownload = [...files]
     }
 
-    toDownload.forEach(async ({ secure_url, original_filename }) => {
-      const fileUrl = await getFileBlobUrl(secure_url)
+    toDownload.forEach(async ({ secureUrl, originalFilename }) => {
+      const fileUrl = await getFileBlobUrl(secureUrl)
 
       const downloadLink = document.createElement('a')
       downloadLink.href = fileUrl
-      downloadLink.download = original_filename
+      downloadLink.download = originalFilename
 
       document.body.appendChild(downloadLink)
       downloadLink.click()

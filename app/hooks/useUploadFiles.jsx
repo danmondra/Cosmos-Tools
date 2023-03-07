@@ -29,16 +29,16 @@ export default function useUploadFiles() {
 
   function formatResponse(file) {
     const formatedResponse = {
-      asset_id: file.asset_id,
+      assetId: file.asset_id,
       bytes: file.bytes,
       bytesOG: file.bytes,
       format: file.format,
       height: file.height,
       heightOG: file.height,
-      original_filename: file.original_filename,
-      public_id: file.public_id,
-      secure_url: file.secure_url,
-      secure_urlOG: file.secure_url,
+      originalFilename: file.original_filename,
+      publicId: file.public_id,
+      secureUrl: file.secure_url,
+      secureUrlOG: file.secure_url,
       width: file.width,
       widthOG: file.width
     }

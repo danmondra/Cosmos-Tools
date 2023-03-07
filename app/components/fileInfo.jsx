@@ -1,13 +1,13 @@
 import { formatBytes, formatDimentions } from '~/utils/formatData'
 
 export function FileInfo({ file }) {
-  const { original_filename, bytes, width, height } = file
+  const { originalFilename, bytes, width, height } = file
 
   return (
     <div className='fileInfo'>
       <p className='fileInfoName'>
         File:
-        <span className='fileInfoData'>{original_filename}</span>
+        <span className='fileInfoData'>{originalFilename}</span>
       </p>
       <p className='fileInfoName'>
         Size:

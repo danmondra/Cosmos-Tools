@@ -7,7 +7,7 @@ export function ListOfFiles({ currentFile, setCurrentFile, files }) {
       <div className='listOfFiles'>
         {files.map(file => (
           <ListFile
-            key={file.asset_id}
+            key={file.assetId}
             currentFile={currentFile}
             setCurrentFile={setCurrentFile}
             file={file}

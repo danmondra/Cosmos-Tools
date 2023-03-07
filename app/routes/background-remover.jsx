@@ -1,7 +1,7 @@
 // Hoooks
 import { useState, useEffect } from 'react'
-import useUploadFiles from '~/hooks/useUploadFiles'
 import useInputCompress from '~/hooks/useInputCompress'
+import useUploadFiles from '~/hooks/useUploadFiles'
 
 // Data
 import constellations from '~/data/constellations'
@@ -21,22 +21,26 @@ import { ImagesComparator } from '../components/imageComparator'
 
 // Libraries
 import { Cloudinary } from '@cloudinary/url-gen'
+import { removeBackground, makeTransparent } from '@cloudinary/url-gen/actions/effect'
+import { format } from '@cloudinary/url-gen/actions/delivery'
 
 export function meta() {
   return (
     {
-      title: 'Image Compressor'
+      title: 'Background Remover'
     }
   )
 }
 
-function ImageCompressor() {
+function BackgroundRemover() {
   const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState({})
-  const [InputRangeCompress, percent] = useInputCompress({ valueToModify: 'bytes' })
 
-  const { name, description } = constellations[0].stars[2]
+  // Activar cuando se acaben los créditos
+  const [InputRange, tolerance] = useInputCompress({ valueToModify: 'tolerance' })
+
+  const { name, description } = constellations[2].stars[1]
 
   useEffect(() => {
     if (images.length === 0) return
@@ -48,34 +52,42 @@ function ImageCompressor() {
   }, [images])
 
   useEffect(() => {
-    const imageExists = currentImage?.originalFilename
-    if (!imageExists) return
+    if (images.length === 0) return
 
-    compressImage()
-  }, [percent])
+    images.forEach((image) => {
+      if (!image.removedBackground) {
+        removeBg(image)
+      }
+    })
+  }, [images])
 
-  function compressImage() {
+  function removeBg(image) {
     const cloudinary = new Cloudinary({
       cloud: {
         cloudName: 'dczm31ujx'
       }
     })
 
-    const img = cloudinary.image(currentImage.publicId).quality(percent)
+    const cloudinaryImg = cloudinary.image(image.publicId)
+      .effect(makeTransparent())
+      .effect(removeBackground())
+      .delivery(format('png'))
 
-    updateImage(img)
+    updateImage(image, cloudinaryImg)
   }
 
-  async function updateImage(img) {
-    const newImage = { ...currentImage }
+  async function updateImage(image, cloudinaryImg) {
+    const newImage = { ...image }
 
-    newImage.secureUrl = img.toURL()
+    newImage.secureUrl = cloudinaryImg.toURL()
 
-    const urlImageInfo = img.addFlag('getinfo').toURL()
+    const urlImageInfo = cloudinaryImg.addFlag('getinfo').toURL()
     const imageInfo = await getFileInfo(urlImageInfo)
+
     newImage.bytes = imageInfo.output.bytes
     newImage.width = imageInfo.output.width
     newImage.height = imageInfo.output.height
+    newImage.removedBackground = true
 
     setCurrentImage(newImage)
 
@@ -101,11 +113,6 @@ function ImageCompressor() {
         <section className='stellarObjectsList fileOptionsContainer'>
           {currentImage?.originalFilename
             ? <>
-              <InputRangeCompress
-                group='compress'
-                size={currentImage.bytes}
-                sizeOG={currentImage.bytesOG}
-              />
               <BtnDownload
                 text='Download'
                 files={currentImage}
@@ -113,6 +120,10 @@ function ImageCompressor() {
               <FileInfo
                 file={currentImage}
               />
+              <p className='fileInfoWarning'>
+                <svg xmlns='http://www.w3.org/2000/svg' height='48' viewBox='0 96 960 960' width='48' fill='#fff' className='fileInfoWarningIcon'><path d='M479.982 776q14.018 0 23.518-9.482 9.5-9.483 9.5-23.5 0-14.018-9.482-23.518-9.483-9.5-23.5-9.5-14.018 0-23.518 9.482-9.5 9.483-9.5 23.5 0 14.018 9.482 23.518 9.483 9.5 23.5 9.5ZM453 623h60V370h-60v253Zm27.266 353q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80 658.319 80 575.5q0-82.819 31.5-155.659Q143 347 197.5 293t127.341-85.5Q397.681 176 480.5 176q82.819 0 155.659 31.5Q709 239 763 293t85.5 127Q880 493 880 575.734q0 82.734-31.5 155.5T763 858.316q-54 54.316-127 86Q563 976 480.266 976Zm.234-60Q622 916 721 816.5t99-241Q820 434 721.188 335 622.375 236 480 236q-141 0-240.5 98.812Q140 433.625 140 576q0 141 99.5 240.5t241 99.5Zm-.5-340Z' /></svg>
+                This is a free version of the image remover, it may have errors, sorry for the inconvenience.
+              </p>
             </>
             : <ImageExamples
                 fileExamples={imageExamples}
@@ -142,4 +153,4 @@ function ImageCompressor() {
   )
 }
 
-export default ImageCompressor
+export default BackgroundRemover

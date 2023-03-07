@@ -1,5 +1,5 @@
 export function ImagePreview({ image }) {
-  const { secure_url, original_filename } = image
+  const { secureUrl, originalFilename } = image
 
   return (
     <div className='previewCrop'>
@@ -7,7 +7,7 @@ export function ImagePreview({ image }) {
         Preview:
       </p>
       <picture className='previewCropContainer'>
-        <img src={secure_url} alt={`Image of ${original_filename}`} id='imagePreview' className='previewCropImage' />
+        <img src={secureUrl} alt={`Image of ${originalFilename}`} id='imagePreview' className='previewCropImage' />
       </picture>
     </div>
 

@@ -38,21 +38,21 @@ function ImageResizer() {
   const [currentImage, setCurrentImage] = useState({})
 
   const [InputRangeWidth, width] = useInputSize({ valueToModify: 'width', currentFile: currentImage })
-  const [InputRangeHeight, height] = useInputSize({ valueToModify: 'height', currentFile: currentImage })
+  const [InputRangeHeight, height] = useInputSize({ valueToModify: 'height' })
 
   const { name, description } = constellations[0].stars[0]
 
   useEffect(() => {
     if (images.length === 0) return
 
-    const imageExists = currentImage?.original_filename
+    const imageExists = currentImage?.originalFilename
     if (imageExists) return
 
     setCurrentImage(images[0])
   }, [images])
 
   useEffect(() => {
-    const imageExists = currentImage?.original_filename
+    const imageExists = currentImage?.originalFilename
     if (!imageExists) return
 
     resizeImage()
@@ -65,7 +65,7 @@ function ImageResizer() {
       }
     })
 
-    const img = cloudinary.image(currentImage.public_id)
+    const img = cloudinary.image(currentImage.publicId)
 
     if (scale) {
       const { widthOG, heightOG } = currentImage
@@ -80,7 +80,7 @@ function ImageResizer() {
   async function updateImage(img) {
     const newImage = { ...currentImage }
 
-    newImage.secure_url = img.toURL()
+    newImage.secureUrl = img.toURL()
 
     const urlImageInfo = img.addFlag('getinfo').toURL()
     const imageInfo = await getFileInfo(urlImageInfo)
@@ -92,7 +92,7 @@ function ImageResizer() {
     setCurrentImage(newImage)
 
     const newImages = images.map(file => {
-      if (file.public_id === newImage.public_id) {
+      if (file.publicId === newImage.publicId) {
         return newImage
       }
       return file
@@ -108,7 +108,7 @@ function ImageResizer() {
         description={description}
       />
       <section className='stellarObjectsList fileOptionsContainer'>
-        {currentImage?.original_filename
+        {currentImage?.originalFilename
           ? <>
             <form className='formOptionsImage'>
               <InputRangeWidth
@@ -133,24 +133,24 @@ function ImageResizer() {
             <FileInfo
               file={currentImage}
             />
-            </>
+          </>
           : <>
             <ImageExamples
               fileExamples={imageExamples}
               setUploadedFiles={simuleUpload}
             />
-            </>}
+          </>}
       </section>
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>
           <DragAndDrop />
-          {currentImage?.original_filename &&
+          {currentImage?.originalFilename &&
             <ImageViewer
               file={currentImage}
             />}
         </div>
 
-        {currentImage?.original_filename
+        {currentImage?.originalFilename
           ? <ListOfFiles
               currentFile={currentImage}
               setCurrentFile={setCurrentImage}
