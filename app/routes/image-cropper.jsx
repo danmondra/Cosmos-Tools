@@ -170,10 +170,11 @@ function ImageCropper() {
               <FileInfo
                 file={currentImage}
               />
-            </>
+              </>
             : <ImageExamples
                 fileExamples={imageExamples.normal}
                 setUploadedFiles={simuleUpload}
+                group
               />}
         </section>
 

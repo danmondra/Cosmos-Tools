@@ -113,7 +113,7 @@ function ImageCompressor() {
               <FileInfo
                 file={currentImage}
               />
-              </>
+            </>
             : <ImageExamples
                 fileExamples={imageExamples.normal}
                 setUploadedFiles={simuleUpload}
@@ -126,6 +126,7 @@ function ImageCompressor() {
             {currentImage?.originalFilename && (
               <ImagesComparator
                 currentImage={currentImage}
+                zoomOn
               />
             )}
           </div>

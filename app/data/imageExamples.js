@@ -143,5 +143,55 @@ export const imageExamples = {
       profilePicture: 'https://res.cloudinary.com/dczm31ujx/image/upload/c_fill,g_auto,h_256,w_256/r_max/f_png/v1/hackaton/avatar_epowgn?_a=ATCqVAA0',
       urlMinified: 'https://res.cloudinary.com/dczm31ujx/image/upload/c_fill,g_auto,h_256,w_256/f_png/v1/hackaton/avatar_epowgn?_a=ATCqVAA0'
     }
+  ],
+  bgRemoval: [
+    {
+      assetId: 'd87f221c8baa907e4987028c44311ed6',
+      bytes: 40566,
+      bytesOG: 40566,
+      format: 'jpg',
+      height: 468,
+      heightOG: 468,
+      originalFilename: 'D_NQ_NP_775197-MLA45651981367_042021-O',
+      publicId: 'hackaton/D_NQ_NP_775197-MLA45651981367_042021-O_co65hi',
+      secureUrl: 'https://res.cloudinary.com/dczm31ujx/image/upload/e_make_transparent/e_bgremoval/f_png/v1/hackaton/D_NQ_NP_775197-MLA45651981367_042021-O_co65hi_uaxsou?_a=ATCqVAA0',
+      secureUrlOG: 'https://res.cloudinary.com/dczm31ujx/image/upload/v1678170431/hackaton/D_NQ_NP_775197-MLA45651981367_042021-O_co65hi.jpg',
+      width: 500,
+      widthOG: 500,
+      urlMinified: 'https://res.cloudinary.com/dczm31ujx/image/upload/c_scale,h_89,q_25/v1678170431/hackaton/D_NQ_NP_775197-MLA45651981367_042021-O_co65hi.jpg',
+      removedBackground: true
+    },
+    {
+      assetId: '8999b8f699f0a4c3e20cddbfaa2569b7',
+      bytes: 35888,
+      bytesOG: 35888,
+      format: 'jpg',
+      height: 600,
+      heightOG: 600,
+      originalFilename: 'HD-wallpaper-scarlett-johansson-model-actress-scarlett-johansson',
+      publicId: 'hackaton/HD-wallpaper-scarlett-johansson-model-actress-scarlett-johansson_q91gfc',
+      secureUrl: 'https://res.cloudinary.com/dczm31ujx/image/upload/e_make_transparent/e_bgremoval/f_png/v1/hackaton/HD-wallpaper-scarlett-johansson-model-actress-scarlett-johansson_q91gfc_u9bpm5?_a=ATCqVAA0',
+      secureUrlOG: 'https://res.cloudinary.com/dczm31ujx/image/upload/v1678170434/hackaton/HD-wallpaper-scarlett-johansson-model-actress-scarlett-johansson_q91gfc.jpg',
+      width: 800,
+      widthOG: 800,
+      urlMinified: 'https://res.cloudinary.com/dczm31ujx/image/upload/c_scale,h_78,q_29/v1678170434/hackaton/HD-wallpaper-scarlett-johansson-model-actress-scarlett-johansson_q91gfc.jpg',
+      removedBackground: true
+    },
+    {
+      assetId: '04c09f93c10d856025af779df94b181d',
+      bytes: 51144,
+      bytesOG: 51144,
+      format: 'jpg',
+      height: 900,
+      heightOG: 900,
+      originalFilename: 'perro-del-golden-retriever-que-se-sienta-en-fondo-blanco-aislado-44686362',
+      publicId: 'hackaton/perro-del-golden-retriever-que-se-sienta-en-fondo-blanco-aislado-44686362_kdevxp',
+      secureUrl: 'https://res.cloudinary.com/dczm31ujx/image/upload/e_make_transparent/e_bgremoval/f_png/v1/hackaton/perro-del-golden-retriever-que-se-sienta-en-fondo-blanco-aislado-44686362_kdevxp_ngsol3?_a=ATCqVAA0',
+      secureUrlOG: 'https://res.cloudinary.com/dczm31ujx/image/upload/v1678170439/hackaton/perro-del-golden-retriever-que-se-sienta-en-fondo-blanco-aislado-44686362_kdevxp.jpg',
+      width: 600,
+      widthOG: 600,
+      urlMinified: 'https://res.cloudinary.com/dczm31ujx/image/upload/c_fit,h_113,q_26,w_153/v1678170439/hackaton/perro-del-golden-retriever-que-se-sienta-en-fondo-blanco-aislado-44686362_kdevxp.jpg',
+      removedBackground: true
+    }
   ]
 }
