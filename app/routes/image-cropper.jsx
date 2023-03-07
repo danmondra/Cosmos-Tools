@@ -16,6 +16,7 @@ import { FileInfo } from '~/components/fileInfo'
 import { ImageExamples } from '~/components/imageExamples'
 import { ImagePreview } from '~/components/imagePreview'
 import { ImageViewer } from '~/components/imageViewer'
+import { ImagePlaceholder } from '~/components/imagePlaceholder'
 import { ListOfFiles } from '~/components/listOfFiles'
 import { ToolInfo } from '~/components/toolInfo'
 
@@ -181,19 +182,20 @@ function ImageCropper() {
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
-            {currentImage?.originalFilename &&
-              <ImageViewer
-                file={currentImage}
-              />}
+            {currentImage?.originalFilename
+              ? <ImageViewer
+                  file={currentImage}
+                />
+              : <ImagePlaceholder
+                  img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678184484/hackaton/nasa-Yj1M5riCKk4-unsplash_h6yabz_jgvfye.png'
+                  alt='Astronaut lost in the space'
+                />}
           </div>
-          {currentImage?.originalFilename
-            ? <ListOfFiles
-                currentFile={currentImage}
-                setCurrentFile={setCurrentImage}
-                files={images}
-              />
-            : <p className='dragndropText'>No images yet</p>}
-
+          <ListOfFiles
+            currentFile={currentImage}
+            setCurrentFile={setCurrentImage}
+            files={images}
+          />
         </section>
 
       </main>

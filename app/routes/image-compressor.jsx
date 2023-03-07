@@ -17,7 +17,8 @@ import { ToolInfo } from '~/components/toolInfo'
 import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageExamples } from '~/components/imageExamples'
 import { FileInfo } from '~/components/fileInfo'
-import { ImagesComparator } from '../components/imageComparator'
+import { ImagesComparator } from '~/components/imageComparator'
+import { ImagePlaceholder } from '~/components/imagePlaceholder'
 
 // Libraries
 import { Cloudinary } from '@cloudinary/url-gen'
@@ -113,30 +114,32 @@ function ImageCompressor() {
               <FileInfo
                 file={currentImage}
               />
-            </>
+              </>
             : <ImageExamples
                 fileExamples={imageExamples.normal}
                 setUploadedFiles={simuleUpload}
+                group
               />}
         </section>
 
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
-            {currentImage?.originalFilename && (
-              <ImagesComparator
-                currentImage={currentImage}
-                zoomOn
-              />
-            )}
+            {currentImage?.originalFilename
+              ? <ImagesComparator
+                  currentImage={currentImage}
+                  zoomOn={false}
+                />
+              : <ImagePlaceholder
+                  img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678186231/hackaton/photo-1446776877081-d282a0f896e2_ixlib_rb-4_2_bipspy.png'
+                  alt='photo taken from the space shuttle outside of the earth'
+                />}
           </div>
-          {currentImage?.originalFilename
-            ? <ListOfFiles
-                currentFile={currentImage}
-                setCurrentFile={setCurrentImage}
-                files={images}
-              />
-            : <p className='dragndropText'>No images yet</p>}
+          <ListOfFiles
+            currentFile={currentImage}
+            setCurrentFile={setCurrentImage}
+            files={images}
+          />
         </section>
       </main>
     </>

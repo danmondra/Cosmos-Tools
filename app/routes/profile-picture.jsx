@@ -17,6 +17,7 @@ import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageExamples } from '~/components/imageExamples'
 import { FileInfo } from '~/components/fileInfo'
 import { ImageViewer } from '~/components/imageViewer'
+import { ImagePlaceholder } from '~/components/imagePlaceholder'
 
 // Libraries
 import { Cloudinary } from '@cloudinary/url-gen'
@@ -120,7 +121,7 @@ function ProfilePicture() {
               <FileInfo
                 file={currentImage}
               />
-            </>
+              </>
             : <ImageExamples
                 fileExamples={imageExamples.profilePictures}
                 setUploadedFiles={simuleUpload}
@@ -131,19 +132,20 @@ function ProfilePicture() {
         <section className='toolContainer'>
           <div className='imageUploadViewContainer'>
             <DragAndDrop />
-            {currentImage?.originalFilename && (
-              <ImageViewer
-                file={currentImage}
-              />
-            )}
+            {currentImage?.originalFilename
+              ? <ImageViewer
+                  file={currentImage}
+                />
+              : <ImagePlaceholder
+                  img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678184671/hackaton/stock-photo-294768571-removebg-preview_t3plx9.png'
+                  alt='Space Antennas'
+                />}
           </div>
-          {currentImage?.originalFilename
-            ? <ListOfFiles
-                currentFile={currentImage}
-                setCurrentFile={setCurrentImage}
-                files={images}
-              />
-            : <p className='dragndropText'>No images yet</p>}
+          <ListOfFiles
+            currentFile={currentImage}
+            setCurrentFile={setCurrentImage}
+            files={images}
+          />
         </section>
       </main>
     </>

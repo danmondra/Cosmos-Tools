@@ -65,9 +65,9 @@ const constellations = [
       },
       {
         name: 'Almach',
-        description: 'Celebrity Detection',
+        description: 'Convert PDF to JPG',
         id: 'almach',
-        url: 'celebrity-detection',
+        url: 'pdf-to-jpg',
         color: '#5a2204',
         shadow: '#2e0b0b',
         width: '8rem',

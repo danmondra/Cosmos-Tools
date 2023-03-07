@@ -19,6 +19,7 @@ import { ListOfFiles } from '~/components/listOfFiles'
 import { ImageViewer } from '~/components/imageViewer'
 import { FileInfo } from '~/components/fileInfo'
 import { ImageExamples } from '~/components/imageExamples'
+import { ImagePlaceholder } from '~/components/imagePlaceholder'
 
 // Cloudinary
 import { Cloudinary } from '@cloudinary/url-gen'
@@ -145,19 +146,21 @@ function ImageResizer() {
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>
           <DragAndDrop />
-          {currentImage?.originalFilename &&
-            <ImageViewer
-              file={currentImage}
-            />}
+          {currentImage?.originalFilename
+            ? <ImageViewer
+                file={currentImage}
+              />
+            : <ImagePlaceholder
+                img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678185114/hackaton/photo-1614727187346-ec3a009092b0_kzckvf.png'
+                alt='Astronaut fixing something'
+              />}
         </div>
 
-        {currentImage?.originalFilename
-          ? <ListOfFiles
-              currentFile={currentImage}
-              setCurrentFile={setCurrentImage}
-              files={images}
-            />
-          : <p className='dragndropText'>No images yet</p>}
+        <ListOfFiles
+          currentFile={currentImage}
+          setCurrentFile={setCurrentImage}
+          files={images}
+        />
       </section>
     </main>
   )

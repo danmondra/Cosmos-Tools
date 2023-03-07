@@ -515,6 +515,20 @@ img {
   overflow: hidden;
 }
 
+.imagePlaceholderContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.placeholderText {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.imagePlaceholder {
+  object-fit: cover;
+}
+
 /* List of Files */
 
 .listOfFilesContainer {
@@ -610,6 +624,15 @@ img {
   font-weight: normal;
 }
 
+.examplesLink {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #F7DF1E;
+  font-weight: bold;
+
+  transition: color .5s ease;
+}
+
 .examplesList {
   margin: 0;
   padding: 0;
@@ -620,9 +643,9 @@ img {
 
 .examplesListGroup {
   padding: 1rem;
-  border: 2px transparent solid;
   border-radius: .5rem;
   cursor: pointer;
+  border: 2px solid #ffffff20;
 
   transition: border .5s ease, transform .5s ease;
 }
