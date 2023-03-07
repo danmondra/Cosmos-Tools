@@ -1,6 +1,6 @@
 export async function uploadFile(file) {
   const CLOUDINARY_API = 'https://api.cloudinary.com/v1_1/dczm31ujx/image/upload'
-  const CLOUDINARY_UPLOAD_PRESET = 'miduHackaton'
+  const CLOUDINARY_UPLOAD_PRESET = 'analisis'
 
   const formData = new FormData()
   formData.append('file', file)
