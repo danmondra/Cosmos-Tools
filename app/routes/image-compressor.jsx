@@ -113,9 +113,9 @@ function ImageCompressor() {
               <FileInfo
                 file={currentImage}
               />
-            </>
+              </>
             : <ImageExamples
-                fileExamples={imageExamples}
+                fileExamples={imageExamples.normal}
                 setUploadedFiles={simuleUpload}
               />}
         </section>

@@ -38,7 +38,7 @@ function ImageResizer() {
   const [currentImage, setCurrentImage] = useState({})
 
   const [InputRangeWidth, width] = useInputSize({ valueToModify: 'width', currentFile: currentImage })
-  const [InputRangeHeight, height] = useInputSize({ valueToModify: 'height' })
+  const [InputRangeHeight, height] = useInputSize({ valueToModify: 'height', currentFile: currentImage })
 
   const { name, description } = constellations[0].stars[0]
 
@@ -136,8 +136,9 @@ function ImageResizer() {
           </>
           : <>
             <ImageExamples
-              fileExamples={imageExamples}
+              fileExamples={imageExamples.normal}
               setUploadedFiles={simuleUpload}
+              group
             />
           </>}
       </section>

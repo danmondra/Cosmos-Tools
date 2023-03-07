@@ -5,7 +5,6 @@ export function ListFile({ currentFile, setCurrentFile, file }) {
 
   function handleClick() {
     setCurrentFile(file)
-    console.log(file)
   }
 
   return (

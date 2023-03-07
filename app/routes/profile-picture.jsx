@@ -4,7 +4,7 @@ import useUploadFiles from '~/hooks/useUploadFiles'
 
 // Data
 import constellations from '~/data/constellations'
-import { profilePictureExamples } from '~/data/profilePictureExamples'
+import { imageExamples } from '~/data/imageExamples'
 
 // Services
 import { getFileInfo } from '~/services/getFileInfo'
@@ -120,9 +120,9 @@ function ProfilePicture() {
               <FileInfo
                 file={currentImage}
               />
-              </>
+            </>
             : <ImageExamples
-                fileExamples={profilePictureExamples}
+                fileExamples={imageExamples.profilePictures}
                 setUploadedFiles={simuleUpload}
                 group
               />}
