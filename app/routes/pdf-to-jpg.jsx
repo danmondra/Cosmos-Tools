@@ -1,6 +1,7 @@
 // Hoooks
 import { useState, useEffect } from 'react'
 import useUploadFiles from '~/hooks/useUploadFiles'
+import { useOutletContext } from '@remix-run/react'
 
 // Data
 import constellations from '~/data/constellations'
@@ -33,6 +34,7 @@ export function meta() {
 }
 
 function PdfToJpg() {
+  const { toggleLoader } = useOutletContext()
   const [DragAndDrop, files, upgradeFiles, simuleUpload] = useUploadFiles()
 
   const [currentFile, setCurrentFile] = useState({})
@@ -53,6 +55,7 @@ function PdfToJpg() {
 
     files.forEach((file) => {
       if (!file.removedBackground) {
+        toggleLoader(true)
         convertToJpg(file)
       }
     })
@@ -116,7 +119,7 @@ function PdfToJpg() {
               <FileInfo
                 file={currentFile}
               />
-            </>
+              </>
             : <>
               <h2 className='examplesTitle'>No pdf? Don't worry, download this and try it!:</h2>
               <a
@@ -127,7 +130,7 @@ function PdfToJpg() {
               >
                 Eloquent JavaScript
               </a>
-            </>}
+              </>}
         </section>
 
         <section className='toolContainer'>
@@ -136,6 +139,7 @@ function PdfToJpg() {
             {currentFile?.originalFilename
               ? <ImageViewer
                   file={currentFile}
+                  toggleLoader={toggleLoader}
                 />
               : <ImagePlaceholder
                   img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678186884/hackaton/photo-1544942579-9671c890fe89_ixlib_rb-4_rziwcw.png'

@@ -1,6 +1,7 @@
 // Hoooks
 import { useState, useEffect } from 'react'
 import useUploadFiles from '~/hooks/useUploadFiles'
+import { useOutletContext } from '@remix-run/react'
 
 // Data
 import constellations from '~/data/constellations'
@@ -46,6 +47,7 @@ export function meta() {
 }
 
 function ImageCropper() {
+  const {toggleLoader} = useOutletContext()
   const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState({})
@@ -66,6 +68,7 @@ function ImageCropper() {
     const imageExists = currentImage?.originalFilename
     if (!imageExists) return
 
+    toggleLoader(true)
     createCropper()
   }, [currentImage])
 
@@ -186,6 +189,7 @@ function ImageCropper() {
             {currentImage?.originalFilename
               ? <ImageViewer
                   file={currentImage}
+                  toggleLoader={toggleLoader}
                 />
               : <ImagePlaceholder
                   img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678184484/hackaton/nasa-Yj1M5riCKk4-unsplash_h6yabz_jgvfye.png'
