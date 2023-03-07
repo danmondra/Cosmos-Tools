@@ -1,5 +1,7 @@
 import { Outlet, Meta, Links, LiveReload, Scripts, useCatch, Link } from '@remix-run/react'
 
+import { useState } from 'react'
+
 import { StarsBackground } from '~/components/starsBackground'
 import { Header } from '~/components/header'
 
@@ -54,9 +56,20 @@ export function links() {
 }
 
 export default function App() {
+  const [loader, setLoader] = useState(false)
+
+  function toggleLoader(action) {
+    setLoader(action)
+  }
+
   return (
     <Document>
-      <Outlet />
+      <Outlet
+        context={{
+          loader,
+          toggleLoader
+        }}
+      />
     </Document>
   )
 }

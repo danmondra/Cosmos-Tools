@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import useUploadFiles from '~/hooks/useUploadFiles'
 import useInputCompress from '~/hooks/useInputCompress'
+import { useOutletContext } from '@remix-run/react'
 
 // Data
 import constellations from '~/data/constellations'
@@ -32,6 +33,8 @@ export function meta() {
 }
 
 function ImageCompressor() {
+  const { toggleLoader } = useOutletContext()
+
   const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState({})
@@ -52,6 +55,7 @@ function ImageCompressor() {
     const imageExists = currentImage?.originalFilename
     if (!imageExists) return
 
+    toggleLoader(true)
     compressImage()
   }, [percent])
 
@@ -114,7 +118,7 @@ function ImageCompressor() {
               <FileInfo
                 file={currentImage}
               />
-              </>
+            </>
             : <ImageExamples
                 fileExamples={imageExamples.normal}
                 setUploadedFiles={simuleUpload}
@@ -129,6 +133,7 @@ function ImageCompressor() {
               ? <ImagesComparator
                   currentImage={currentImage}
                   zoomOn={false}
+                  toggleLoader={toggleLoader}
                 />
               : <ImagePlaceholder
                   img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678186231/hackaton/photo-1446776877081-d282a0f896e2_ixlib_rb-4_2_bipspy.png'

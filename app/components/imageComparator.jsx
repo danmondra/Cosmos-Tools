@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function ImagesComparator({ currentImage, zoomOn }) {
+export function ImagesComparator({ currentImage, zoomOn, toggleLoader }) {
   const [zoom, setZoom] = useState(zoomOn)
 
   useEffect(() => {
@@ -9,6 +9,10 @@ export function ImagesComparator({ currentImage, zoomOn }) {
 
   function handleClick() {
     setZoom(!zoom)
+  }
+
+  function handleLoad() {
+    toggleLoader(false)
   }
 
   return (
@@ -56,6 +60,7 @@ export function ImagesComparator({ currentImage, zoomOn }) {
           src={currentImage.secureUrl}
           alt={`Name Image: ${currentImage.originalFilename}`}
           className={`imageView imageViewTwoUp ${zoom ? 'zoom' : ''}`}
+          onLoad={handleLoad}
         />
       </two-up>
     </div>

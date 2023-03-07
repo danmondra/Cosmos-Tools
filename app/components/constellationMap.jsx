@@ -22,10 +22,9 @@ export function ConstellationMap({ id, stars }) {
         >
           <Link
             to={star.url}
-            className='starBtnLink'
+            className={`starBtnLink ${star?.disable ? 'stellarObjectDisabled' : ''}`}
             style={{
-              filter: `drop-shadow(0 0 10px ${star.shadow})`,
-              pointerEvents: star?.disable ? 'none' : ''
+              filter: `drop-shadow(0 0 10px ${star.shadow})`
             }}
           >
             <StellarObjectCircle

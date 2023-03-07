@@ -1,8 +1,8 @@
-export function ImageViewer({ file }) {
+export function ImageViewer({ file, toggleLoader }) {
   const { secureUrl, originalFilename, assetId } = file
 
   function handleLoad() {
-    // setLoader false
+    toggleLoader(false)
   }
 
   return (

@@ -17,11 +17,8 @@ export function StellarObject({ star }) {
   return (
     <Link
       to={url}
-      className='stellarObject'
+      className={`stellarObject ${star?.disable ? 'stellarObjectDisabled' : ''}`}
       data-star={id}
-      style={{
-        pointerEvents: star?.disable ? 'none' : ''
-      }}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >

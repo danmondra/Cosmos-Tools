@@ -1,6 +1,7 @@
 // Hoooks
 import { useState, useEffect } from 'react'
 import useUploadFiles from '~/hooks/useUploadFiles'
+import { useOutletContext } from '@remix-run/react'
 
 // Data
 import constellations from '~/data/constellations'
@@ -35,6 +36,8 @@ export function meta() {
 }
 
 function ProfilePicture() {
+  const { toggleLoader } = useOutletContext()
+
   const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
   const [currentImage, setCurrentImage] = useState({})
@@ -53,6 +56,7 @@ function ProfilePicture() {
   useEffect(() => {
     if (images.length === 0) return
 
+    toggleLoader(true)
     images.forEach((image) => {
       if (!image.profilePicture) {
         createProfilePicture(image)
@@ -121,7 +125,7 @@ function ProfilePicture() {
               <FileInfo
                 file={currentImage}
               />
-              </>
+            </>
             : <ImageExamples
                 fileExamples={imageExamples.profilePictures}
                 setUploadedFiles={simuleUpload}
@@ -135,6 +139,7 @@ function ProfilePicture() {
             {currentImage?.originalFilename
               ? <ImageViewer
                   file={currentImage}
+                  toggleLoader={toggleLoader}
                 />
               : <ImagePlaceholder
                   img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678184671/hackaton/stock-photo-294768571-removebg-preview_t3plx9.png'

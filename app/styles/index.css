@@ -114,6 +114,10 @@ img {
   background-color: rgb(0 0 0 / .25);
 }
 
+.stellarObjectDisabled {
+  pointer-events: none;
+}
+
 .star {
   margin: .2rem;
   max-width: 100%;
@@ -484,7 +488,7 @@ img {
 @media (min-width: 768px) {
   .imageUploadViewContainer {
     height: 60vh;
-    min-height: 45rem;
+    min-height: 60rem;
   }
 }
 
@@ -1000,3 +1004,64 @@ two-up {
   font-size: 1.8rem;
   color: var(--white);
 }
+
+/* Loader */
+
+.loaderContainer {
+  position: fixed;
+  bottom: 0%;
+  margin-bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: linear-gradient(258deg, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
+  padding: .5rem 3rem;
+  border-radius: .5rem;
+  opacity: 0;
+  transform: translate(-50%, 12%);
+  z-index: -1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-width: 12rem;
+
+  transition: opacity .5s ease .2s, transform .5s ease .2s;
+}
+
+.loaderContainerActive {
+  opacity: 1;
+  transform: translate(-50%, 0%);
+  z-index: 10
+}
+
+.loaderText {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 31px;
+  height: 31px;
+}
+.lds-dual-ring::after {
+  content: " ";
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
