@@ -10,23 +10,34 @@ export function ConstellationMap({ id, stars }) {
         id={id}
       />
       {stars.map((star) => (
-        <Link
+        <div
           key={`starMap${star.id}`}
-          to={star.url}
           className='starBtn'
           data-star={star.id}
           style={{
             top: star.position.top,
             left: star.position.left,
-            width: star.width,
-            filter: `drop-shadow(0 0 10px ${star.shadow})`
+            width: star.width
           }}
         >
-          <StellarObjectCircle
-            star={star}
-          />
-          {star.name}
-        </Link>
+          <Link
+            to={star.url}
+            className='starBtnLink'
+            style={{
+              filter: `drop-shadow(0 0 10px ${star.shadow})`,
+              pointerEvents: star?.disable ? 'none' : ''
+            }}
+          >
+            <StellarObjectCircle
+              star={star}
+            />
+            {star.name}
+          </Link>
+          <p className='starDescriptionLarge'>
+            {star.largeDescription}
+            <span className='starDescriptionShort'>{star.description}</span>
+          </p>
+        </div>
       ))}
     </div>
   )

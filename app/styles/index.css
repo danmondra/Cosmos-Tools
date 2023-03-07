@@ -218,11 +218,50 @@ img {
   all: unset;
   display: block;
   position: relative;
-  cursor: pointer;
+}
+
+.starBtnLink {
+  display: block;
+  text-decoration: none;
   color: var(--white);
   font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
+}
+
+.starDescriptionLarge {
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translate(-50%, 12%);
+  padding: 1rem;
+  width: 20rem;
+  opacity: 0;
+  font-size: 1.4rem;
+  font-weight: normal;
+  border-radius: .5rem;
+  color: var(--white);
+  background-image: linear-gradient(258deg, rgb(var(--primaryRGB) / .7) 0%, rgb(var(--primaryRGB) / .3) 80%, rgb(var(--primaryRGB) / .2) 100%);
+  margin: 0;
+  z-index: -1;
+
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.starBtn:hover
+.starDescriptionLarge,
+.starDescriptionLargeActive {
+  opacity: 1;
+  transform: translate(-50%, 0%);
+  z-index: 10;
+}
+
+.starDescriptionShort {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: .5rem;
 }
 
 .svgConnector {
