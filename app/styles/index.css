@@ -395,6 +395,10 @@ img {
 
 
 .btnDownload {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  justify-content: space-between;
   width: 100%;
   padding: 1rem 2rem;
   background-color: var(--primary);
@@ -532,6 +536,12 @@ img {
   padding: 1rem 2rem;
   border-radius: .5rem;
   cursor: pointer;
+
+  transition: background-color .5s ease;
+}
+
+.browseFiles:hover {
+  background-color: rgb(var(--primaryRGB) / .5);
 }
 
 .inputFile {
@@ -710,7 +720,7 @@ img {
 }
 
 .examplesList:not(.examplesListGroup)
-  .exampleImageContainer:hover {
+.exampleImageContainer:hover {
   border: 2px solid var(--white);
   transform: scale(1.04);
 }
@@ -901,16 +911,18 @@ img {
 
 .btnCropImage {
   all: unset;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  justify-content: space-between;
   padding: 1rem 2rem;
   text-align: center;
   color: var(--white);
   font-size: 1.8rem;
-  font-weight: bold;
+  font-weight: 700;
   border: 2px solid var(--white);
   border-radius: .5rem;
   cursor: pointer;
-
   transition: background-color .5s ease;
 }
 

@@ -162,6 +162,7 @@ function ImageCropper() {
                   onClick={cropImage}
                 >
                   Crop Image
+                  <svg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 96 960 960' width='24' fill='#fff'><path d='M695 1016V851H265q-24 0-42-18t-18-42V361H40v-60h165V136h60v655h655v60H755v165h-60Zm0-285V361H325v-60h370q24 0 42 18t18 42v370h-60Z' /></svg>
                 </button>
                 <BtnDownload
                   text='Download'
