@@ -1,8 +1,16 @@
-export function ImageViewer({ file, toggleLoader }) {
+import { useOutletContext } from '@remix-run/react'
+import { useEffect } from 'react'
+
+export function ImageViewer({ file }) {
+  const { setLoaderImage } = useOutletContext()
   const { secureUrl, originalFilename, assetId } = file
 
+  useEffect(() => {
+    setLoaderImage(false)
+  }, [file])
+
   function handleLoad() {
-    toggleLoader(false)
+    setLoaderImage(false)
   }
 
   return (

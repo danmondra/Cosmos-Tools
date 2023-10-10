@@ -11,7 +11,14 @@ export default function Index() {
 
   return (
     <main className='container main'>
-      <div />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        <h1 className='mainTitle'>Create awesome content with our stellar tools!</h1>
+      </div>
       <Navigation
         constellation={constellation}
         setConstellation={setConstellation}

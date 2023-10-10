@@ -35,7 +35,7 @@ export function meta() {
 }
 
 function ImageResizer() {
-  const { toggleLoader } = useOutletContext()
+  const { setLoaderImage } = useOutletContext()
 
   const [DragAndDrop, images, upgradeImages, simuleUpload] = useUploadFiles()
 
@@ -59,7 +59,7 @@ function ImageResizer() {
     const imageExists = currentImage?.originalFilename
     if (!imageExists) return
 
-    toggleLoader(true)
+    setLoaderImage(true)
     resizeImage()
   }, [width, height])
 
@@ -138,14 +138,14 @@ function ImageResizer() {
             <FileInfo
               file={currentImage}
             />
-            </>
+          </>
           : <>
             <ImageExamples
               fileExamples={imageExamples.normal}
               setUploadedFiles={simuleUpload}
               group
             />
-            </>}
+          </>}
       </section>
       <section className='toolContainer'>
         <div className='imageUploadViewContainer'>
@@ -153,7 +153,6 @@ function ImageResizer() {
           {currentImage?.originalFilename
             ? <ImageViewer
                 file={currentImage}
-                toggleLoader={toggleLoader}
               />
             : <ImagePlaceholder
                 img='https://res.cloudinary.com/dczm31ujx/image/upload/v1678185114/hackaton/photo-1614727187346-ec3a009092b0_kzckvf.png'

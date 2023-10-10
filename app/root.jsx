@@ -56,18 +56,14 @@ export function links() {
 }
 
 export default function App() {
-  const [loader, setLoader] = useState(false)
-
-  function toggleLoader(action) {
-    setLoader(action)
-  }
+  const [loaderImage, setLoaderImage] = useState(false)
 
   return (
     <Document>
       <Outlet
         context={{
-          loader,
-          toggleLoader
+          loaderImage,
+          setLoaderImage
         }}
       />
     </Document>
